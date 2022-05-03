@@ -20,12 +20,13 @@ class Road {
 }
 
 class Car {
-  constructor(image, x, y, isPlayer, speed) {
+  constructor(image, x, y, isPlayer, isEnemy, speed) {
     this.x = x;
     this.y = y;
     this.loaded = false;
     this.dead = false;
     this.isPlayer = isPlayer;
+    this.isEnemy = isEnemy;
     this.speed = speed;
     this.image = new Image();
     let obj = this;
@@ -33,7 +34,9 @@ class Car {
     this.image.src = image;
   }
   update() {
-    this.y += gameSpeed;
+    if (!this.isplayer) {
+      this.y += gameSpeed;
+    }
     if (this.y > canvas.height + 50) {
       this.dead = true;
     }
