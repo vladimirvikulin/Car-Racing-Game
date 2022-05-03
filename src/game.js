@@ -20,8 +20,17 @@ const UPDATE_TIME = 1000 / 60;
 let timer = null;
 const scale = 0.12;
 
-let PLAYER1 = {};
-let PLAYER2 = {};
+let player1 = new Car(
+  'images/yellowCar.png',
+  canvas.width - 1460, canvas.height / 2,
+  true,
+  15,);
+
+let player2 = new Car(
+  'images/redCar.png',
+  canvas.width - 500, canvas.height / 2,
+  true,
+  15,);
 
 const roads = [
   new Road('./images/road.png', 0),
