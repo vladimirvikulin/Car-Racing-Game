@@ -70,8 +70,23 @@ function draw() {
       canvas.width
     );
   }
+  drawCar(player1);
+  drawCar(player2);
 }
 
+function drawCar(car) {
+  ctx.drawImage(
+    car.image,
+    0,
+    0,
+    car.image.width,
+    car.image.height,
+    car.x,
+    car.y,
+    car.image.width * scale,
+    car.image.height * scale
+  );
+}
 start();
 
 
