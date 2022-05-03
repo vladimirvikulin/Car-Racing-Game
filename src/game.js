@@ -41,11 +41,26 @@ function reload() {
 }
 
 function update() {
+  roads[0].update(roads[1]);
+  roads[1].update(roads[0]);
   draw();
 }
 
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+  for (let i = 0; i < roads.length; i++) {
+    ctx.drawImage(
+      roads[i].image,
+      0,
+      0,
+      roads[i].image.width,
+      roads[i].image.height,
+      roads[i].x,
+      roads[i].y,
+      canvas.width,
+      canvas.width
+    );
+  }
 }
 
 start();
