@@ -13,4 +13,15 @@ function resize() {
 
 resize();
 
+const gameSpeed = 5;
+const objects = [];
+const events = {};
+const UPDATE_TIME = 1000 / 60;
+let timer = null;
+const scale = 0.12;
+
+let PLAYER1 = {};
+let PLAYER2 = {};
+
+
 
