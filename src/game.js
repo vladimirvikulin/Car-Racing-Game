@@ -20,6 +20,15 @@ const UPDATE_TIME = 1000 / 60;
 let timer = null;
 const scale = 0.12;
 
+window.addEventListener('keydown', (e) => {
+  events[e.code] = true;
+  moveCar();
+});
+
+window.addEventListener('keyup', (e) => {
+  events[e.code] = false;
+});
+
 let player1 = new Car(
   'images/yellowCar.png',
   canvas.width - 1460, canvas.height / 2,
@@ -87,6 +96,45 @@ function drawCar(car) {
     car.image.height * scale
   );
 }
+
+function moveCar() {
+  if (player1.isPlayer) {
+    if (events['ArrowLeft']) {
+      player1.move('x', 0);
+    }
+    if (events['ArrowRight']) {
+      player1.move('x', 1);
+    }
+    if (events['ArrowUp']) {
+      player1.move('y', 0);
+    }
+    if (events['ArrowDown']) {
+      player1.move('y', 1);
+    }
+  }
+  if (player2.isPlayer) {
+    if (events['KeyA']) {
+      player2.move('x', 0);
+    }
+    if (events['KeyD']) {
+      player2.move('x', 1);
+    }
+    if (events['KeyW']) {
+      player2.move('y', 0);
+    }
+    if (events['KeyS']) {
+      player2.move('y', 1);
+    }
+  }
+  if (events['Escape']) {
+    if (timer === null) {
+      start();
+    } else {
+      reload();
+    }
+  }
+}
+
 start();
 
 
