@@ -1,6 +1,6 @@
 'use strict';
 
-class Road  {
+class Road {
   constructor(image, y) {
     this.x = 0;
     this.y = y;
@@ -14,7 +14,7 @@ class Road  {
   update(road) {
     this.y += gameSpeed;
     if (this.y > window.innerHeight) {
-      this.y = road.y - canvas.width + gameSpeed; 
+      this.y = road.y - canvas.width + gameSpeed;
     }
   }
 }

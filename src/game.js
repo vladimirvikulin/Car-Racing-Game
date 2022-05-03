@@ -23,6 +23,11 @@ const scale = 0.12;
 let PLAYER1 = {};
 let PLAYER2 = {};
 
+const roads = [
+  new Road('./images/road.png', 0),
+  new Road('./images/road.png', canvas.width)
+];
+
 function start() {
   timer = setInterval(update, UPDATE_TIME);
 }
@@ -42,4 +47,8 @@ function update() {
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
+
+start();
+
+
 
