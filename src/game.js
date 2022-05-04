@@ -61,14 +61,38 @@ function reload() {
 function update() {
   roads[0].update(roads[1]);
   roads[1].update(roads[0]);
+
+  player1.update();
+  player2.update();
+
   for (let i = 0; i < objects.length; i++) {
     objects[i].update();
     if (objects[i].dead) {
       objects.splice(i, 1);
     }
   }
-  spawnEnemies();
+  let hit = false;
+
+  for (let i = 0; i < objects.length; i++) {
+    hit = player1.collision(objects[i]);
+    if (hit) {
+      player1.dead = true;
+      break;
+    }
+
+    hit = player2.collision(objects[i]);
+    if (hit) {
+      player2.dead = true;
+      break;
+    }
+  }
   draw();
+  if (player1.dead) player1.isPlayer = false;
+  if (player2.dead) player2.isPlayer = false;
+  if (player1.dead && player2.dead) {
+    reload();
+  }
+  spawnEnemies();
 }
 
 function spawnEnemies() {
@@ -163,7 +187,7 @@ function moveCar() {
 }
 
 function randomNum(min, max) {
-  let rand = min - 0.5 + Math.random() * (max - min + 1);
+  const rand = min - 0.5 + Math.random() * (max - min + 1);
   return Math.round(rand);
 }
 

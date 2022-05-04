@@ -42,6 +42,18 @@ class Car {
     }
   }
 
+  collision(car) {
+    let hit = false;
+
+    if (this.y < car.y + car.image.height * scale &&
+      this.y + this.image.height * scale > car.y &&
+      this.x + this.image.width * scale > car.x &&
+      this.x < car.x + car.image.width * scale) {
+      hit = true;
+    }
+    return hit;
+  }
+
   move(coord, direction) {
     if (coord === 'x') {
       direction ? this.x += this.speed : this.x -= this.speed; 
