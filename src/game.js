@@ -98,15 +98,31 @@ function update() {
 
 function spawnEnemies() {
   if (randomNum(0, 10000) > 9700) {
-    switch (randomNum(1, 2)) {
+    switch (randomNum(1, 4)) {
     case 1:
       objects.push(new Car('./images/enemyCar1.png',
         randomNum(30, canvas.width - 50), randomNum(250, 400) * -1,
         false, true, 9));
+      break;
     case 2:
       objects.push(new Car('./images/enemyCar2.png', 
         randomNum(30, canvas.width - 50), randomNum(250, 400) * -1,
         false, true, 9));
+      break;
+    case 3:
+      if (player1.score >= 1000 || player2.score >= 1000) {
+        objects.push(new Car('./images/enemyCarBoss1.png',
+          randomNum(30, canvas.width - 50), randomNum(250, 400) * -1,
+          false, true, 7));
+      }
+      break;
+    case 4:
+      if (player1.score >= 1500 || player2.score >= 1500) {
+        objects.push(new Car('./images/enemyCarBoss2.png',
+          randomNum(30, canvas.width - 50), randomNum(250, 400) * -1,
+          false, true, 5));
+      }
+      break;
     }
   }
 }
