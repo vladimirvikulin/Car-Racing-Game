@@ -32,13 +32,13 @@ window.addEventListener('keyup', (e) => {
 let player1 = new Car(
   'images/yellowCar.png',
   canvas.width - 1460, canvas.height / 2,
-  true,
+  true, false,
   15,);
 
 let player2 = new Car(
   'images/redCar.png',
   canvas.width - 500, canvas.height / 2,
-  true,
+  true, false,
   15,);
 
 const roads = [
@@ -61,7 +61,23 @@ function reload() {
 function update() {
   roads[0].update(roads[1]);
   roads[1].update(roads[0]);
+  spawnEnemies();
   draw();
+}
+
+function spawnEnemies() {
+  if (randomNum(0, 10000) > 9700) {
+    switch (randomNum(1, 2)) {
+    case 1:
+      objects.push(new Car('./images/enemyCar1.png',
+        randomNum(30, canvas.width - 50), randomNum(250, 400) * -1,
+        false, true));
+    case 2:
+      objects.push(new Car('./images/enemyCar2.png', 
+        randomNum(30, canvas.width - 50), randomNum(250, 400) * -1,
+        false, true));
+    }
+  }
 }
 
 function draw() {
@@ -79,8 +95,14 @@ function draw() {
       canvas.width
     );
   }
+
   drawCar(player1);
   drawCar(player2);
+
+  for (let i = 0; i < objects.length; i++) {
+    drawCar(objects[i]);
+    objects[i].update();
+  }
 }
 
 function drawCar(car) {
@@ -136,7 +158,7 @@ function moveCar() {
 }
 
 function randomNum(min, max) {
-  const rand = min - 0.5 + Math.random() * (max - min + 1);
+  let rand = min - 0.5 + Math.random() * (max - min + 1);
   return Math.round(rand);
 }
 

@@ -34,7 +34,7 @@ class Car {
     this.image.src = image;
   }
   update() {
-    if (!this.isplayer) {
+    if (!this.isPlayer) {
       this.y += gameSpeed;
     }
     if (this.y > canvas.height + 50) {
