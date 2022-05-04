@@ -55,7 +55,7 @@ function reload() {
     clearInterval(timer);
     timer = null;
     location.reload();
-  }, 2000);
+  }, 7000);
 }
 
 function update() {
@@ -86,14 +86,15 @@ function update() {
       break;
     }
   }
+  draw();
   if (player1.dead) player1.isPlayer = false;
   if (player2.dead) player2.isPlayer = false;
   if (player1.dead && player2.dead) {
+    endScore();
     reload();
   }
   spawnEnemies();
   moveEnemy();
-  draw();
 }
 
 function spawnEnemies() {
@@ -216,6 +217,25 @@ function moveCar() {
 function randomNum(min, max) {
   const rand = min - 0.5 + Math.random() * (max - min + 1);
   return Math.round(rand);
+}
+
+function endScore() {
+  const congrag1 = 'Поздравляю игрок №1 набрал больше очков. Его счет:';
+  const congrag2 = 'Поздравляю игрок №2 набрал больше очков. Его счет:';
+  if (player1.score > player2.score) {
+    ctx.font = '40px Comic Sans MS';
+    ctx.fillStyle = '#00ffff';
+    ctx.fillText(congrag1 + player1.score,
+      (canvas.width - ctx.measureText(congrag1).width) / 2,
+      canvas.height / 2);
+  }
+  if (player2.score > player1.score) {
+    ctx.font = '40px Comic Sans MS';
+    ctx.fillStyle = '#00ffff';
+    ctx.fillText(congrag2 + player2.score,
+      (canvas.width - ctx.measureText(congrag2).width) / 2,
+      canvas.height / 2);
+  }
 }
 
 start();
