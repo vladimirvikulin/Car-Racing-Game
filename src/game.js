@@ -86,13 +86,14 @@ function update() {
       break;
     }
   }
-  draw();
   if (player1.dead) player1.isPlayer = false;
   if (player2.dead) player2.isPlayer = false;
   if (player1.dead && player2.dead) {
     reload();
   }
   spawnEnemies();
+  moveEnemy();
+  draw();
 }
 
 function spawnEnemies() {
@@ -101,12 +102,18 @@ function spawnEnemies() {
     case 1:
       objects.push(new Car('./images/enemyCar1.png',
         randomNum(30, canvas.width - 50), randomNum(250, 400) * -1,
-        false, true));
+        false, true, 9));
     case 2:
       objects.push(new Car('./images/enemyCar2.png', 
         randomNum(30, canvas.width - 50), randomNum(250, 400) * -1,
-        false, true));
+        false, true, 9));
     }
+  }
+}
+
+function moveEnemy() {
+  for (const car of objects) {
+    car.move('y', 1);
   }
 }
 

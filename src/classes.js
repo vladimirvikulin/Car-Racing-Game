@@ -65,11 +65,13 @@ class Car {
       }
     } else {
       direction ? this.y += this.speed : this.y -= this.speed;
-      if (this.y + this.image.height * scale > canvas.height) {
-        this.y -= this.speed;
-      }
-      if (this.y < 0) {
-        this.y = 0;
+      if (!this.isEnemy) {
+        if (this.y + this.image.height * scale > canvas.height) {
+          this.y -= this.speed;
+        }
+        if (this.y < 0) {
+          this.y = 0;
+        }
       }
     }
   }
