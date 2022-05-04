@@ -61,6 +61,12 @@ function reload() {
 function update() {
   roads[0].update(roads[1]);
   roads[1].update(roads[0]);
+  for (let i = 0; i < objects.length; i++) {
+    objects[i].update();
+    if (objects[i].dead) {
+      objects.splice(i, 1);
+    }
+  }
   spawnEnemies();
   draw();
 }
@@ -101,7 +107,6 @@ function draw() {
 
   for (let i = 0; i < objects.length; i++) {
     drawCar(objects[i]);
-    objects[i].update();
   }
 }
 
