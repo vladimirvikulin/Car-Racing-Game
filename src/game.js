@@ -29,13 +29,13 @@ window.addEventListener('keyup', (e) => {
   events[e.code] = false;
 });
 
-let player1 = new Car(
+const player1 = new Car(
   'images/yellowCar.png',
   canvas.width - 1460, canvas.height / 2,
   true, false,
   15,);
 
-let player2 = new Car(
+const player2 = new Car(
   'images/redCar.png',
   canvas.width - 500, canvas.height / 2,
   true, false,
@@ -105,7 +105,7 @@ function spawnEnemies() {
         false, true, 9));
       break;
     case 2:
-      objects.push(new Car('./images/enemyCar2.png', 
+      objects.push(new Car('./images/enemyCar2.png',
         randomNum(30, canvas.width - 50), randomNum(250, 400) * -1,
         false, true, 9));
       break;
