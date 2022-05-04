@@ -139,6 +139,10 @@ function draw() {
   for (let i = 0; i < objects.length; i++) {
     drawCar(objects[i]);
   }
+  ctx.fillStyle = 'white';
+  ctx.font = '30px Comic Sans MS';
+  ctx.fillText('Счет игрока №1: ' + player1.score, 40, canvas.height - 20);
+  ctx.fillText('Счет игрока №2: ' + player2.score, 1540, canvas.height - 20);
 }
 
 function drawCar(car) {
@@ -197,7 +201,6 @@ function randomNum(min, max) {
   const rand = min - 0.5 + Math.random() * (max - min + 1);
   return Math.round(rand);
 }
-
 
 start();
 

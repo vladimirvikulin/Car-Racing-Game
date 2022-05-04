@@ -28,12 +28,14 @@ class Car {
     this.isPlayer = isPlayer;
     this.isEnemy = isEnemy;
     this.speed = speed;
+    this.score = 0;
     this.image = new Image();
-    let obj = this;
+    const obj = this;
     this.image.addEventListener('load', () => obj.loaded = true);
     this.image.src = image;
   }
   update() {
+    if (this.isPlayer) this.score++;
     if (!this.isPlayer) {
       this.y += gameSpeed;
     }
