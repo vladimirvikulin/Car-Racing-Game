@@ -82,12 +82,14 @@ function update() {
     hit = player1.collision(objects[i]);
     if (hit) {
       player1.dead = true;
+      soundEfects();
       break;
     }
 
     hit = player2.collision(objects[i]);
     if (hit) {
       player2.dead = true;
+      soundEfects();
       break;
     }
   }
@@ -179,6 +181,12 @@ function drawCar(car) {
     car.image.width * scale,
     car.image.height * scale
   );
+}
+
+function soundEfects() {
+  const collision = new Audio();
+  collision.src = './audio/collision.wav';
+  collision.play();
 }
 
 function moveCar() {
