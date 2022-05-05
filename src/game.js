@@ -33,17 +33,17 @@ let player1 = {};
 let player2 = {};
 
 const PLAYER1_CARS = {
-	YEllOW_CAR1: new Car("./images/yellowCar.png", canvas.width - 1460, canvas.height / 2, true, false, 15),
-	RED_CAR1: new Car("./images/redCar.png", canvas.width - 1460, canvas.height / 2, true, false, 14),
-	BLACK_CAR1: new Car("./images/blackCar.png", canvas.width - 1460, canvas.height / 2, true, false, 12 ),
-	PURPLE_CAR1:  new Car("./images/purpleCar.png", canvas.width - 1460, canvas.height / 2, true, false, 11),
+	YEllOW_CAR1: new Car('./images/yellowCar.png', canvas.width - 1460, canvas.height / 2, true, false, 15),
+	RED_CAR1: new Car('./images/redCar.png', canvas.width - 1460, canvas.height / 2, true, false, 14),
+	BLACK_CAR1: new Car('./images/blackCar.png', canvas.width - 1460, canvas.height / 2, true, false, 12 ),
+	PURPLE_CAR1:  new Car('./images/purpleCar.png', canvas.width - 1460, canvas.height / 2, true, false, 11),
 };
 
 const PLAYER2_CARS = {
-  YEllOW_CAR2: new Car("./images/yellowCar.png", canvas.width - 500, canvas.height / 2, true,false, 15),
-	RED_CAR2: new Car("./images/redCar.png", canvas.width - 500, canvas.height / 2, true,false, 14),
-	BLACK_CAR2: new Car("./images/blackCar.png", canvas.width - 500, canvas.height / 2, true,false, 12),
-	PURPLE_CAR2: new Car("./images/purpleCar.png", canvas.width - 500, canvas.height / 2, true,false, 11),
+  YEllOW_CAR2: new Car('./images/yellowCar.png', canvas.width - 500, canvas.height / 2, true,false, 15),
+	RED_CAR2: new Car('./images/redCar.png', canvas.width - 500, canvas.height / 2, true,false, 14),
+	BLACK_CAR2: new Car('./images/blackCar.png', canvas.width - 500, canvas.height / 2, true,false, 12),
+	PURPLE_CAR2: new Car('./images/purpleCar.png', canvas.width - 500, canvas.height / 2, true,false, 11),
 };
 
 const roads = [
