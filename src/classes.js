@@ -77,4 +77,22 @@ class Car {
       }
     }
   }
+  pickCar1() {
+    player1 = this;
+    console.log(player1);
+    if (player2.hasOwnProperty('isPlayer')) {
+      document.getElementById('p1').remove();
+      document.getElementById('p2').remove();
+      start();
+    }
+  }
+
+  pickCar2() {
+    player2 = this;
+    if (player1.hasOwnProperty('isPlayer')) {
+      document.getElementById('p1').remove();
+      document.getElementById('p2').remove();
+      start();
+    }
+  }
 }
