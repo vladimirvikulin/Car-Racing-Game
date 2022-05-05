@@ -19,3 +19,39 @@ body, html
 	height: 100%;
 	background: #000;
 }
+
+.pickMenu{
+    height: 100%;
+    background-color: #e8e806e8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.player1{
+    width: 50%;
+    float: left;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    text-align: center;
+	font-size: 30px;
+	font-weight: bold;
+}
+
+.player2{
+    width: 50%;
+    float: right;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    text-align: center;
+	font-size: 30px;
+	font-weight: bold;
+}
+
+.item{
+    width: 200px;
+    margin: 40px;
+}
+.item:hover{
+    transform: scale(1.3);
+    transition: 0.3s;
+}
