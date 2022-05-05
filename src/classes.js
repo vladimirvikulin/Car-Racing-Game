@@ -79,7 +79,6 @@ class Car {
   }
   pickCar1() {
     player1 = this;
-    console.log(player1);
     if (player2.hasOwnProperty('isPlayer')) {
       document.getElementById('p1').remove();
       document.getElementById('p2').remove();

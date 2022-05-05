@@ -243,7 +243,7 @@ function endScore() {
   }
 }
 
-start();
+
 
 
 
