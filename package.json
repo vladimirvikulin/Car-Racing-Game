@@ -1,0 +1,26 @@
+{
+  "name": "car-racing",
+  "version": "1.0.0",
+  "description": "This is a race for two players where they have to dodge enemies",
+  "main": "classes.js",
+  "scripts": {
+    "test": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vladimirvikulin/Car-Racing.git"
+  },
+  "author": "Volodymyr Vikulin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vladimirvikulin/Car-Racing/issues"
+  },
+  "homepage": "https://github.com/vladimirvikulin/Car-Racing#readme",
+  "devDependencies": {
+    "eslint": "^8.13.0",
+    "eslint-config-google": "^0.14.0"
+  },
+  "dependencies": {
+    "prettier": "^2.6.2"
+  }
+}
