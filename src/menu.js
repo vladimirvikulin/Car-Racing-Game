@@ -85,7 +85,8 @@ window.IntroScene = class {
     backgroundImage.src = './images/introBackground.png';
     ctx.fillStyle = '#c0c0c0';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.drawImage(backgroundImage, 650, 50);
+    ctx.drawImage(backgroundImage, canvas.width / 2 - backgroundImage.width / 2,
+      canvas.height / 2 - backgroundImage.height / 2 - 150);
     // draw big logo text
     ctx.globalAlpha = Math.min(1, this.elapsedTime / this.logoRevealTime);
     ctx.font = '80px Comic Sans MS';
