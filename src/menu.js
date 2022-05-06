@@ -62,3 +62,43 @@ window.Game = class {
   }
 };
 
+// Intro scene
+window.IntroScene = class {
+  constructor(game) {
+    this.logoRevealTime = 2;
+    this.textTypingTime = 2;
+    this.sceneDisplayTime = 6;
+    this.elapsedTime = 0;
+    this.bigText = 'Car-Racing';
+    this.infoText = 'This is game for two players, just dodge enemies and beat your opponent';
+    this.game = game;
+  }
+  update(dt) {
+    this.elapsedTime += dt;
+    if (this.elapsedTime >= this.sceneDisplayTime || this.game.checkKeyPress(13)) { //press Enter to skip IntroScene
+      this.game.setScene(MenuScene);
+    }
+  }
+  render(dt, ctx, canvas) {
+    // fill background
+    const backgroundImage = new Image();
+    backgroundImage.src = './images/introBackground.png';
+    ctx.fillStyle = '#c0c0c0';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(backgroundImage, 650, 50);
+    // draw big logo text
+    ctx.globalAlpha = Math.min(1, this.elapsedTime / this.logoRevealTime);
+    ctx.font = '80px Comic Sans MS';
+    ctx.fillStyle = '#000';
+    ctx.fillText(this.bigText, (canvas.width - ctx.measureText(this.bigText).width) / 2, canvas.height / 2);
+    // draw typing text
+    if (this.elapsedTime >= this.logoRevealTime) {
+    let textProgress = Math.min(1, (this.elapsedTime - this.logoRevealTime) / this.textTypingTime);
+      ctx.font = '20px Comic Sans MS';
+      ctx.fillStyle = '#000';
+      ctx.fillText(this.infoText.substr(0, Math.floor(this.infoText.length * textProgress)),
+        (canvas.width - ctx.measureText(this.infoText).width) / 2, canvas.height / 2 + 80);
+    }
+  }
+};
+
