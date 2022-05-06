@@ -173,8 +173,8 @@ window.MenuScene = class {
 // Main game scene
 window.GameScene = function render() {
   const a = document.createElement('a');
-  a.href = 'game.html';
-  a.download = 'game.html';
+  a.href = 'index.html';
+  a.download = 'index.html';
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
