@@ -189,4 +189,10 @@ window.Garage = function render() {
   document.body.removeChild(a);
 };
 
+// Exit scene
+window.ExitScene = function render() {
+  window.close();
+};
 
+// launch game
+const game = new Game();
