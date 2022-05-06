@@ -105,7 +105,7 @@ function update() {
 }
 
 function spawnEnemies() {
-  if (randomNum(0, 10000) > 9700) {
+  if (randomNum(0, 10000) > 9000) {
     switch (randomNum(1, 4)) {
     case 1:
       objects.push(new Car('./images/enemyCar1.png',
