@@ -180,3 +180,13 @@ window.GameScene = function render() {
   document.body.removeChild(a);
 };
 
+window.Garage = function render() {
+  const a = document.createElement('a');
+  a.href = 'garage.html';
+  a.download = 'garage.html';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+};
+
+
