@@ -29,6 +29,24 @@ body, html
     justify-content: space-around;
 }
 
+.garage{
+    height: 100%;
+    background-color: #e8e806e8;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.header{
+    width: 100%;
+    background-color: #e8e806e8;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    text-align: center;
+	font-size: 60px;
+	font-weight: bold;
+}
+
 .player1{
     width: 50%;
     float: left;
@@ -48,10 +66,26 @@ body, html
 }
 
 .item{
-    width: 200px;
-    margin: 40px;
+    width: 25%;
 }
 .item:hover{
     transform: scale(1.3);
     transition: 0.3s;
 }
+
+.item:hover p{
+    opacity: 1;
+    background: #06e88e;
+    cursor: pointer;
+}
+
+p {
+    opacity: 0;
+    font-size: 30px;
+    font-weight: 700;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    line-height: 50px;
+    text-align: center;
+    color: #fff;
+    transition: .5s ease;
+  }
