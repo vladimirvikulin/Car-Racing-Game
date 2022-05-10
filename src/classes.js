@@ -45,15 +45,11 @@ class Car {
   }
 
   collision(car) {
-    let hit = false;
-
-    if (this.y < car.y + car.image.height * scale &&
-      this.y + this.image.height * scale > car.y &&
-      this.x + this.image.width * scale > car.x &&
-      this.x < car.x + car.image.width * scale) {
-      hit = true;
-    }
-    return hit;
+    const collisionTop = this.y < car.y + car.image.height * scale;
+    const collisionBottom = this.y + this.image.height * scale > car.y;
+    const collisionLeft = this.x + this.image.width * scale > car.x;
+    const collisionRight = this.x < car.x + car.image.width * scale;
+    return (collisionTop && collisionBottom && collisionLeft && collisionRight);
   }
 
   move(coord, direction) {
