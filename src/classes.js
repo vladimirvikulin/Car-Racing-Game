@@ -34,11 +34,12 @@ class Car {
     this.image.src = image;
   }
   update() {
+    const BORDER_SHIFT = 50;
     if (this.isPlayer) this.score++;
     if (!this.isPlayer) {
       this.y += gameSpeed;
     }
-    if (this.y > canvas.height + 50) {
+    if (this.y > canvas.height + BORDER_SHIFT) {
       this.dead = true;
     }
   }
