@@ -6,8 +6,7 @@ class Road {
     this.y = y;
     this.loaded = false;
     this.image = new Image();
-    let obj = this;
-    this.image.addEventListener('load', () => obj.loaded = true);
+    this.image.addEventListener('load', () => this.loaded = true);
     this.image.src = image;
   }
 
