@@ -29,8 +29,7 @@ class Car {
     this.speed = speed;
     this.score = 0;
     this.image = new Image();
-    const obj = this;
-    this.image.addEventListener('load', () => obj.loaded = true);
+    this.image.addEventListener('load', () => this.loaded = true);
     this.image.src = image;
   }
   update() {
