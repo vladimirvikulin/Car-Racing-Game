@@ -19,7 +19,7 @@ const events = {};
 const UPDATE_TIME = 1000 / 60;
 let timer = null;
 const scale = 0.12;
-let players = 0
+let players = 0;
 const CAR_SHIFT = 100;
 const PLAYER_DATA = [
   ['yellow', 15],
@@ -108,34 +108,28 @@ function update() {
 }
 
 function spawnEnemies() {
-  if (randomNum(0, 10000) > 9000) {
+  if (randomNum(0, 10) > 9) {
+    const ENEMY_CARS = Car.createEnemy();
     switch (randomNum(1, 4)) {
     case 1:
-      objects.push(new Car('./images/enemyCar1.png',
-        randomNum(30, canvas.width - 50), randomNum(250, 400) * -1,
-        false, true, 9));
+      objects.push(ENEMY_CARS[0]);
       break;
     case 2:
-      objects.push(new Car('./images/enemyCar2.png',
-        randomNum(30, canvas.width - 50), randomNum(250, 400) * -1,
-        false, true, 9));
+      objects.push(ENEMY_CARS[1]);
       break;
     case 3:
       if (player1.score >= 1000 || player2.score >= 1000) {
-        objects.push(new Car('./images/enemyCarBoss1.png',
-          randomNum(30, canvas.width - 50), randomNum(250, 400) * -1,
-          false, true, 7));
+        objects.push(ENEMY_CARS[2]);
       }
       break;
     case 4:
       if (player1.score >= 1500 || player2.score >= 1500) {
-        objects.push(new Car('./images/enemyCarBoss2.png',
-          randomNum(30, canvas.width - 50), randomNum(250, 400) * -1,
-          false, true, 5));
+        objects.push(ENEMY_CARS[3]);
       }
       break;
     }
   }
+  console.log(objects);
 }
 
 function moveEnemy() {
