@@ -90,4 +90,29 @@ class Car {
       start();
     }
   }
+
+  static createPlayer() {
+    players++;
+    return PLAYER_DATA.map(([color, speed]) => {
+      let x = 0;
+      if (players === 1) {
+        x = canvas.width / 2 - CAR_SHIFT;
+      } else {
+        x = canvas.width / 2 + CAR_SHIFT;
+      }
+      const y = canvas.height / 2;
+      const img = `./images/${color}Car.png`;
+      return new this(img, x, y, true, false, speed);
+    });
+  }
+
+  static createEnemy() {
+    return ENEMY_DATA.map(([name, speed]) => {
+      const x = randomNum(30, canvas.width - 50);
+      const y = randomNum(250, 400) * -1;
+      const img = `./images/${name}.png`;
+      return new this(img, x, y, false, true, speed);
+    });
+  }
 }
+
