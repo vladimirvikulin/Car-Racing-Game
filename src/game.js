@@ -19,6 +19,20 @@ const events = {};
 const UPDATE_TIME = 1000 / 60;
 let timer = null;
 const scale = 0.12;
+let players = 0
+const CAR_SHIFT = 100;
+const PLAYER_DATA = [
+  ['yellow', 15],
+  ['red', 14],
+  ['black', 13],
+  ['purple', 12],
+];
+const ENEMY_DATA = [
+  ['enemyCar1', 9],
+  ['enemyCar2', 10],
+  ['enemyCar3', 7],
+  ['enemyCar4', 6],
+];
 
 window.addEventListener('keydown', (e) => {
   events[e.code] = true;
