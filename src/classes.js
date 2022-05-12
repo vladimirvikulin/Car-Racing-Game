@@ -53,7 +53,8 @@ class Car {
 
   move(coord, direction) {
     if (coord === 'x') {
-      direction ? this.x += this.speed : this.x -= this.speed; 
+      if (direction === 'right') this.x += this.speed;
+      else if (direction === 'left') this.x -= this.speed;
       if (this.x + this.image.width * scale > canvas.width) {
         this.x -= this.speed;
       }
@@ -61,7 +62,8 @@ class Car {
         this.x = 0;
       }
     } else {
-      direction ? this.y += this.speed : this.y -= this.speed;
+      if (direction === 'down') this.y += this.speed;
+      else if (direction === 'up') this.y -= this.speed;
       if (!this.isEnemy) {
         if (this.y + this.image.height * scale > canvas.height) {
           this.y -= this.speed;
