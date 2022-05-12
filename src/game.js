@@ -15,7 +15,6 @@ resize();
 
 const gameSpeed = 5;
 const objects = [];
-const events = {};
 const UPDATE_TIME = 1000 / 60;
 let timer = null;
 const scale = 0.12;
@@ -33,15 +32,6 @@ const ENEMY_DATA = [
   ['enemyCar3', 7],
   ['enemyCar4', 6],
 ];
-
-window.addEventListener('keydown', (e) => {
-  events[e.code] = true;
-  moveCar();
-});
-
-window.addEventListener('keyup', (e) => {
-  events[e.code] = false;
-});
 
 let player1 = {};
 let player2 = {};
@@ -105,6 +95,7 @@ function update() {
   }
   spawnEnemies();
   moveEnemy();
+  moveCar();
 }
 
 function spawnEnemies() {
@@ -134,7 +125,7 @@ function spawnEnemies() {
 
 function moveEnemy() {
   for (const car of objects) {
-    car.move('y', 1);
+    car.move('y', 'down');
   }
 }
 
@@ -187,40 +178,27 @@ function soundEfects() {
 }
 
 function moveCar() {
+  window.addEventListener('keydown', (e) => {
+    codes[e.code] = true;
+  });
+  window.addEventListener('keyup', (e) => {
+    codes[e.code] = false;
+  });
   if (player1.isPlayer) {
-    if (events['ArrowLeft']) {
-      player1.move('x', 0);
-    }
-    if (events['ArrowRight']) {
-      player1.move('x', 1);
-    }
-    if (events['ArrowUp']) {
-      player1.move('y', 0);
-    }
-    if (events['ArrowDown']) {
-      player1.move('y', 1);
-    }
+    if (codes['ArrowLeft']) player1.move('x', 'left');
+    if (codes['ArrowRight']) player1.move('x', 'right');
+    if (codes['ArrowUp']) player1.move('y', 'up');
+    if (codes['ArrowDown']) player1.move('y', 'down');
   }
   if (player2.isPlayer) {
-    if (events['KeyA']) {
-      player2.move('x', 0);
-    }
-    if (events['KeyD']) {
-      player2.move('x', 1);
-    }
-    if (events['KeyW']) {
-      player2.move('y', 0);
-    }
-    if (events['KeyS']) {
-      player2.move('y', 1);
-    }
+    if (codes['KeyA']) player2.move('x', 'left');
+    if (codes['KeyD']) player2.move('x', 'right');
+    if (codes['KeyW']) player2.move('y', 'up');
+    if (codes['KeyS']) player2.move('y', 'down');
   }
-  if (events['Escape']) {
-    if (timer === null) {
-      start();
-    } else {
-      reload();
-    }
+  if (codes['Escape']) {
+    if (timer === null) start();
+    else reload();
   }
 }
 
