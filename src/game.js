@@ -13,7 +13,7 @@ function resize() {
 
 resize();
 
-const gameSpeed = 5;
+let gameSpeed = 5;
 const objects = [];
 const codes = {
   'ArrowLeft': false,
@@ -32,10 +32,10 @@ const scale = 0.12;
 let players = 0;
 const CAR_SHIFT = 100;
 const PLAYER_DATA = [
-  ['yellow', 15],
-  ['red', 14],
-  ['black', 13],
-  ['purple', 12],
+  ['yellow', 10],
+  ['red', 9],
+  ['black', 8],
+  ['purple', 6],
 ];
 const ENEMY_DATA = [
   ['enemyCar1', 9],
@@ -107,6 +107,7 @@ function update() {
   spawnEnemies();
   moveEnemy();
   moveCar();
+  gameDifficulty();
 }
 
 function spawnEnemies() {
@@ -196,16 +197,16 @@ function moveCar() {
     codes[e.code] = false;
   });
   if (player1.isPlayer) {
-    if (codes['ArrowLeft']) player1.move('x', 'left');
-    if (codes['ArrowRight']) player1.move('x', 'right');
-    if (codes['ArrowUp']) player1.move('y', 'up');
-    if (codes['ArrowDown']) player1.move('y', 'down');
-  }
-  if (player2.isPlayer) {
     if (codes['KeyA']) player2.move('x', 'left');
     if (codes['KeyD']) player2.move('x', 'right');
     if (codes['KeyW']) player2.move('y', 'up');
     if (codes['KeyS']) player2.move('y', 'down');
+  }
+  if (player2.isPlayer) {
+    if (codes['ArrowLeft']) player1.move('x', 'left');
+    if (codes['ArrowRight']) player1.move('x', 'right');
+    if (codes['ArrowUp']) player1.move('y', 'up');
+    if (codes['ArrowDown']) player1.move('y', 'down');
   }
   if (codes['Escape']) {
     if (timer === null) start();
@@ -237,7 +238,12 @@ function endScore() {
   }
 }
 
-
-
-
-
+function gameDifficulty() {
+  if (player1.score === 1000 || player2.score === 1000 ||
+    player1.score === 2000 || player2.score === 2000 ||
+    player1.score === 3000 || player2.score === 3000 ||
+    player1.score === 4000 || player2.score === 4000 ||
+    player1.score === 5000 || player2.score === 5000) {
+    gameSpeed += 5;
+  }
+}
