@@ -70,7 +70,6 @@ function reload() {
 function update() {
   roads[0].update(roads[1]);
   roads[1].update(roads[0]);
-
   player1.update();
   player2.update();
 
@@ -86,6 +85,8 @@ function update() {
     hit = player1.collision(objects[i]);
     if (hit) {
       player1.dead = true;
+      player1.isPlayer = false;
+      if (gameSpeed !== 5) gameSpeed -= 5;
       soundEfects();
       break;
     }
@@ -93,13 +94,13 @@ function update() {
     hit = player2.collision(objects[i]);
     if (hit) {
       player2.dead = true;
+      player2.isPlayer = false;
+      if (gameSpeed !== 5) gameSpeed -= 5;
       soundEfects();
       break;
     }
   }
   draw();
-  if (player1.dead) player1.isPlayer = false;
-  if (player2.dead) player2.isPlayer = false;
   if (player1.dead && player2.dead) {
     endScore();
     reload();
@@ -197,16 +198,16 @@ function moveCar() {
     codes[e.code] = false;
   });
   if (player1.isPlayer) {
-    if (codes['KeyA']) player2.move('x', 'left');
-    if (codes['KeyD']) player2.move('x', 'right');
-    if (codes['KeyW']) player2.move('y', 'up');
-    if (codes['KeyS']) player2.move('y', 'down');
+    if (codes['KeyA']) player1.move('x', 'left');
+    if (codes['KeyD']) player1.move('x', 'right');
+    if (codes['KeyW']) player1.move('y', 'up');
+    if (codes['KeyS']) player1.move('y', 'down');
   }
   if (player2.isPlayer) {
-    if (codes['ArrowLeft']) player1.move('x', 'left');
-    if (codes['ArrowRight']) player1.move('x', 'right');
-    if (codes['ArrowUp']) player1.move('y', 'up');
-    if (codes['ArrowDown']) player1.move('y', 'down');
+    if (codes['ArrowLeft']) player2.move('x', 'left');
+    if (codes['ArrowRight']) player2.move('x', 'right');
+    if (codes['ArrowUp']) player2.move('y', 'up');
+    if (codes['ArrowDown']) player2.move('y', 'down');
   }
   if (codes['Escape']) {
     if (timer === null) start();
