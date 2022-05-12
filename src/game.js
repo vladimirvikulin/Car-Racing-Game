@@ -15,6 +15,17 @@ resize();
 
 const gameSpeed = 5;
 const objects = [];
+const codes = {
+  'ArrowLeft': false,
+  'ArrowRight': false,
+  'ArrowUp': false,
+  'ArrowDown': false,
+  'KeyA': false,
+  'KeyD': false,
+  'KeyW': false,
+  'KeyS': false,
+  'Escape': false,
+};
 const UPDATE_TIME = 1000 / 60;
 let timer = null;
 const scale = 0.12;
