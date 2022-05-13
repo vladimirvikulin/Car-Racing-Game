@@ -12,8 +12,8 @@ window.Game = class {
   }
   initInput() {
     this.keys = {};
-    document.addEventListener('keydown', e => { this.keys[e.which] = true; });
-    document.addEventListener('keyup', e => { this.keys[e.which] = false; });
+    document.addEventListener('keydown', (e) => { this.keys[e.which] = true; });
+    document.addEventListener('keyup', (e) => { this.keys[e.which] = false; });
   }
   checkKeyPress(keyCode) {
     const isKeyPressed = this.keys[keyCode];
@@ -75,7 +75,9 @@ window.IntroScene = class {
   }
   update(dt) {
     this.elapsedTime += dt;
-    if (this.elapsedTime >= this.sceneDisplayTime || this.game.checkKeyPress(13)) { //press Enter to skip IntroScene
+    //press Enter to skip IntroScene
+    if (this.elapsedTime >= this.sceneDisplayTime ||
+      this.game.checkKeyPress(13)) {
       this.game.setScene(MenuScene);
     }
   }
@@ -85,20 +87,25 @@ window.IntroScene = class {
     backgroundImage.src = './images/introBackground.png';
     ctx.fillStyle = '#c0c0c0';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.drawImage(backgroundImage, canvas.width / 2 - backgroundImage.width / 2,
+    ctx.drawImage(backgroundImage,
+      canvas.width / 2 - backgroundImage.width / 2,
       canvas.height / 2 - backgroundImage.height / 2 - 150);
     // draw big logo text
     ctx.globalAlpha = Math.min(1, this.elapsedTime / this.logoRevealTime);
     ctx.font = '80px Comic Sans MS';
     ctx.fillStyle = '#000';
-    ctx.fillText(this.bigText, (canvas.width - ctx.measureText(this.bigText).width) / 2, canvas.height / 2);
+    ctx.fillText(this.bigText,
+      (canvas.width - ctx.measureText(this.bigText).width) / 2,
+      canvas.height / 2);
     // draw typing text
     if (this.elapsedTime >= this.logoRevealTime) {
-    let textProgress = Math.min(1, (this.elapsedTime - this.logoRevealTime) / this.textTypingTime);
+      let textProgress = Math.min(1, (this.elapsedTime - this.logoRevealTime) / this.textTypingTime);
       ctx.font = '20px Comic Sans MS';
       ctx.fillStyle = '#000';
-      ctx.fillText(this.infoText.substr(0, Math.floor(this.infoText.length * textProgress)),
-        (canvas.width - ctx.measureText(this.infoText).width) / 2, canvas.height / 2 + 80);
+      ctx.fillText(this.infoText.substr(0,
+        Math.floor(this.infoText.length * textProgress)),
+      (canvas.width - ctx.measureText(this.infoText).width) / 2,
+      canvas.height / 2 + 80);
     }
   }
 };
@@ -130,15 +137,18 @@ window.MenuScene = class {
       this.menuIndex %= this.menuItems.length;
     } else if (this.game.checkKeyPress(87)) { // UP arrow
       this.menuIndex--;
-      if (this.menuIndex < 0) this.menuIndex = this.menuItems.length -1;
+      if (this.menuIndex < 0) this.menuIndex = this.menuItems.length - 1;
     }
 
     // menu item selected
     if (this.game.checkKeyPress(13)) {
       switch (this.menuIndex) {
-      case 0: this.game.setScene(GameScene); break;
-      case 1: this.game.setScene(Garage); break;
-      case 2: this.game.setScene(ExitScene); break;
+      case 0: this.game.setScene(GameScene);
+        break;
+      case 1: this.game.setScene(Garage);
+        break;
+      case 2: this.game.setScene(ExitScene);
+        break;
       }
     }
   }
@@ -153,20 +163,27 @@ window.MenuScene = class {
     ctx.font = '60px Comic Sans MS';
     ctx.textBaseline = 'top';
     ctx.fillStyle = '#00ffff';
-    ctx.fillText(this.menuTitle, (canvas.width - ctx.measureText(this.menuTitle).width) / 2, 10);
+    ctx.fillText(this.menuTitle,
+      (canvas.width - ctx.measureText(this.menuTitle).width) / 2,
+      10);
 
     // draw menu items
-    const itemHeight = 50, fontSize = 30;
+    const itemHeight = 50;
+    const fontSize = 30;
     ctx.font = fontSize + 'px Comic Sans MS';
     for (const [index, item] of this.menuItems.entries()) {
       if (index === this.menuIndex) {
         ctx.globalAlpha = this.menuActiveOpacity;
         ctx.fillStyle = '#089cd3';
-        ctx.fillRect(0, canvas.height / 2 + index * itemHeight, canvas.width, itemHeight);
+        ctx.fillRect(0,
+          canvas.height / 2 + index * itemHeight,
+          canvas.width, itemHeight);
       }
       ctx.globalAlpha = 1;
       ctx.fillStyle = '#fff';
-      ctx.fillText(item, (canvas.width - ctx.measureText(item).width) / 2, canvas.height / 2 + index * itemHeight + (itemHeight - fontSize) / 2);
+      ctx.fillText(item,
+        (canvas.width - ctx.measureText(item).width) / 2,
+        canvas.height / 2 + index * itemHeight + (itemHeight - fontSize) / 2);
     }
   }
 };
