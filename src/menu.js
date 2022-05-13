@@ -172,28 +172,29 @@ window.MenuScene = class {
 };
 
 // Main game scene
-window.GameScene = function render() {
-  const a = document.createElement('a');
-  a.href = 'index.html';
-  a.download = 'index.html';
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
+window.GameScene = function gameStart() {
+  window.open('game.html', '_self');
 };
 
-window.Garage = function render() {
-  const a = document.createElement('a');
-  a.href = 'garage.html';
-  a.download = 'garage.html';
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
+window.Garage = function openGarage() {
+  window.open('garage.html', '_self');
 };
 
 // Exit scene
-window.ExitScene = function render() {
-  window.close();
-};
+window.ExitScene = class {
+  update(dt) {}
+  render(dt, ctx, canvas) {
+    // clear the canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const gameOverText = 'Thanks for playing my game';
+    ctx.textBaseline = 'top';
+    ctx.font = '100px Comic Sans MS';
+    ctx.fillStyle = '#089cd3';
+    ctx.fillText(gameOverText,
+      (canvas.width - ctx.measureText(gameOverText).width) / 2,
+      canvas.height / 2 - 50);
+  }
+}
 
 // launch game
 const game = new Game();

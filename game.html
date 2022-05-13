@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>CarRacing</title>
+		<link rel="stylesheet" href="./styles/style.css">
+		<meta charset="utf-8">
+		<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' />
+	</head>
+	<body>
+		<div class="pickMenu player1" id="p1">		
+			<div>Player1</div>
+			<img src="./images/yellowPick.png" class="item" onclick="PLAYER1_CARS[0].pickCar1()" />
+			<img src="./images/redPick.png" class="item" onclick="PLAYER1_CARS[1].pickCar1()" />
+			<img src="./images/blackPick.png" class="item" onclick="PLAYER1_CARS[2].pickCar1()" />
+			<img src="./images/purplePick.png" class="item" onclick="PLAYER1_CARS[3].pickCar1()" />
+		  </div>
+        </div>
+        <div class="pickMenu player2" id="p2">
+			<div>Player2</div>
+			<img src="./images/yellowPick.png" class="item" onclick="PLAYER2_CARS[0].pickCar2()" />
+			<img src="./images/redPick.png" class="item" onclick="PLAYER2_CARS[1].pickCar2()" />
+			<img src="./images/blackPick.png" class="item" onclick="PLAYER2_CARS[2].pickCar2()" />
+			<img src="./images/purplePick.png" class="item" onclick="PLAYER2_CARS[3].pickCar2()" />
+		  </div>
+		<div class="wrapper">
+			<canvas width="0" height="0" class="canvas" id="canvas">Your browser does not support JavaScript and HTML5!</canvas>
+		</div>
+        <script src="./src/classes.js"></script>
+        <script src="./src/game.js"></script>
+	</body>
+</html>
