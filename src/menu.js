@@ -73,11 +73,10 @@ window.IntroScene = class {
     this.game = game;
   }
   update(dt) {
-    const ENTER = 13;
+    const Enter = 13;
     this.elapsedTime += dt;
-    //press Enter to skip IntroScene
     if (this.elapsedTime >= this.sceneDisplayTime ||
-      this.game.checkKeyPress(ENTER)) {
+      this.game.checkKeyPress(Enter)) {
       this.game.setScene(MenuScene);
     }
   }
@@ -132,22 +131,27 @@ window.MenuScene = class {
     ];
   }
   update(dt) {
+    const KeyW = 87;
+    const KeyS = 83;
+    const ArrowUp = 38;
+    const ArrowDown = 40;
+    const Enter = 13;
     // calculate active menu item opacity
     const opacityValue = this.menuActiveOpacity + dt * this.opacityDirection;
     if (opacityValue > 1 || opacityValue < 0) this.opacityDirection *= -1;
     this.menuActiveOpacity += dt * this.opacityDirection;
 
     // menu navigation
-    if (this.game.checkKeyPress(83)) { // DOWN arrow
+    if (this.game.checkKeyPress(KeyS) || this.game.checkKeyPress(ArrowDown)) {
       this.menuIndex++;
       this.menuIndex %= this.menuItems.length;
-    } else if (this.game.checkKeyPress(87)) { // UP arrow
+    } else if (this.game.checkKeyPress(KeyW) || this.game.checkKeyPress(ArrowUp)) {
       this.menuIndex--;
       if (this.menuIndex < 0) this.menuIndex = this.menuItems.length - 1;
     }
 
     // menu item selected
-    if (this.game.checkKeyPress(13)) {
+    if (this.game.checkKeyPress(Enter)) {
       switch (this.menuIndex) {
       case 0: this.game.setScene(GameScene);
         break;
