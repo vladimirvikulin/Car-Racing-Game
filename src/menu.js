@@ -1,5 +1,11 @@
 'use strict';
 
+const KeyW = 87;
+const KeyS = 83;
+const ArrowUp = 38;
+const ArrowDown = 40;
+const Enter = 13;
+
 window.Game = class {
   constructor() {
     this.canvas = document.querySelector('canvas');
@@ -73,7 +79,6 @@ window.IntroScene = class {
     this.game = game;
   }
   update(dt) {
-    const Enter = 13;
     this.elapsedTime += dt;
     if (this.elapsedTime >= this.sceneDisplayTime ||
       this.game.checkKeyPress(Enter)) {
@@ -131,17 +136,16 @@ window.MenuScene = class {
     ];
   }
   update(dt) {
-    const KeyW = 87;
-    const KeyS = 83;
-    const ArrowUp = 38;
-    const ArrowDown = 40;
-    const Enter = 13;
-    // calculate active menu item opacity
+    this.calculateMenuOpacity(dt);
+    this.menuNavigation();
+    this.menuItemSelected();
+  }
+  calculateMenuOpacity(dt) {
     const opacityValue = this.menuActiveOpacity + dt * this.opacityDirection;
     if (opacityValue > 1 || opacityValue < 0) this.opacityDirection *= -1;
     this.menuActiveOpacity += dt * this.opacityDirection;
-
-    // menu navigation
+  }
+  menuNavigation() {
     if (this.game.checkKeyPress(KeyS) || this.game.checkKeyPress(ArrowDown)) {
       this.menuIndex++;
       this.menuIndex %= this.menuItems.length;
@@ -149,8 +153,8 @@ window.MenuScene = class {
       this.menuIndex--;
       if (this.menuIndex < 0) this.menuIndex = this.menuItems.length - 1;
     }
-
-    // menu item selected
+  }
+  menuItemSelected() {
     if (this.game.checkKeyPress(Enter)) {
       switch (this.menuIndex) {
       case 0: this.game.setScene(GameScene);
