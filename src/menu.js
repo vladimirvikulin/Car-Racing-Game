@@ -149,10 +149,17 @@ window.MenuScene = class {
     if (this.game.checkKeyPress(KeyS) || this.game.checkKeyPress(ArrowDown)) {
       this.menuIndex++;
       this.menuIndex %= this.menuItems.length;
+      this.menuSound();
     } else if (this.game.checkKeyPress(KeyW) || this.game.checkKeyPress(ArrowUp)) {
       this.menuIndex--;
       if (this.menuIndex < 0) this.menuIndex = this.menuItems.length - 1;
+      this.menuSound();
     }
+  }
+  menuSound() {
+    const menuSelectEffect = new Audio();
+    menuSelectEffect.src = './audio/menuSelectEffect.mp3';
+    menuSelectEffect.play();
   }
   menuItemSelected() {
     if (this.game.checkKeyPress(Enter)) {
