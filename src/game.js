@@ -79,27 +79,8 @@ function update() {
       objects.splice(i, 1);
     }
   }
-  let hit = false;
-
-  for (let i = 0; i < objects.length; i++) {
-    hit = player1.collision(objects[i]);
-    if (hit) {
-      player1.dead = true;
-      player1.isPlayer = false;
-      if (gameSpeed !== 5) gameSpeed -= 5;
-      soundEfects();
-      break;
-    }
-
-    hit = player2.collision(objects[i]);
-    if (hit) {
-      player2.dead = true;
-      player2.isPlayer = false;
-      if (gameSpeed !== 5) gameSpeed -= 5;
-      soundEfects();
-      break;
-    }
-  }
+  collision(player1);
+  collision(player2);
   draw();
   if (player1.dead && player2.dead) {
     endScore();
@@ -109,6 +90,20 @@ function update() {
   moveEnemy();
   moveCar();
   gameDifficulty();
+}
+
+function collision(player) {
+  let hit = false;
+  for (let i = 0; i < objects.length; i++) {
+    hit = player.collision(objects[i]);
+    if (hit) {
+      player.dead = true;
+      player.isPlayer = false;
+      if (gameSpeed !== 5) gameSpeed -= 5;
+      soundEfects();
+      break;
+    }
+  }
 }
 
 function spawnEnemies() {
