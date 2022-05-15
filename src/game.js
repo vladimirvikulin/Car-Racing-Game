@@ -72,24 +72,18 @@ function update() {
   roads[1].update(roads[0]);
   player1.update();
   player2.update();
-
-  for (let i = 0; i < objects.length; i++) {
-    objects[i].update();
-    if (objects[i].dead) {
-      objects.splice(i, 1);
-    }
-  }
+  checkEnemyDead();
   collision(player1);
   collision(player2);
   draw();
-  if (player1.dead && player2.dead) {
-    endScore();
-    reload();
-  }
   spawnEnemies();
   moveEnemy();
   moveCar();
   gameDifficulty();
+  if (player1.dead && player2.dead) {
+    endScore();
+    reload();
+  }
 }
 
 function collision(player) {
@@ -102,6 +96,15 @@ function collision(player) {
       if (gameSpeed !== 5) gameSpeed -= 5;
       soundEfects();
       break;
+    }
+  }
+}
+
+function checkEnemyDead() {
+  for (let i = 0; i < objects.length; i++) {
+    objects[i].update();
+    if (objects[i].dead) {
+      objects.splice(i, 1);
     }
   }
 }
