@@ -74,18 +74,20 @@ class Car {
       }
     }
   }
+
+
   pickCar1() {
     player1 = this;
-    if (player2.hasOwnProperty('isPlayer')) {
-      document.getElementById('p1').remove();
-      document.getElementById('p2').remove();
-      start();
-    }
+    this.checkPlayer(player2);
   }
 
   pickCar2() {
     player2 = this;
-    if (player1.hasOwnProperty('isPlayer')) {
+    this.checkPlayer(player1);
+  }
+
+  checkPlayer(player) {
+    if (player.hasOwnProperty('isPlayer')) {
       document.getElementById('p1').remove();
       document.getElementById('p2').remove();
       start();
