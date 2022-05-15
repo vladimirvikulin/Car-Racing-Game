@@ -22,7 +22,6 @@ window.Game = class {
       this.lastKeyState[keyCode] = isKeyPressed;
       return false;
     }
-
     if (this.lastKeyState[keyCode] !== isKeyPressed) {
       this.lastKeyState[keyCode] = isKeyPressed;
       return isKeyPressed;
@@ -74,15 +73,23 @@ window.IntroScene = class {
     this.game = game;
   }
   update(dt) {
+    const ENTER = 13;
     this.elapsedTime += dt;
     //press Enter to skip IntroScene
     if (this.elapsedTime >= this.sceneDisplayTime ||
-      this.game.checkKeyPress(13)) {
+      this.game.checkKeyPress(ENTER)) {
       this.game.setScene(MenuScene);
     }
   }
   render(dt, ctx, canvas) {
     // fill background
+    this.fillBackground(ctx, canvas);
+    // draw big logo text
+    this.drawLogoText(ctx, canvas);
+    // draw typing text
+    this.drawTypingText(ctx, canvas);
+  }
+  fillBackground(ctx, canvas) {
     const backgroundImage = new Image();
     backgroundImage.src = './images/introBackground.png';
     ctx.fillStyle = '#c0c0c0';
@@ -90,14 +97,16 @@ window.IntroScene = class {
     ctx.drawImage(backgroundImage,
       canvas.width / 2 - backgroundImage.width / 2,
       canvas.height / 2 - backgroundImage.height / 2 - 150);
-    // draw big logo text
+  }
+  drawLogoText(ctx, canvas) {
     ctx.globalAlpha = Math.min(1, this.elapsedTime / this.logoRevealTime);
     ctx.font = '80px Comic Sans MS';
     ctx.fillStyle = '#000';
     ctx.fillText(this.bigText,
       (canvas.width - ctx.measureText(this.bigText).width) / 2,
       canvas.height / 2);
-    // draw typing text
+  }
+  drawTypingText(ctx, canvas) {
     if (this.elapsedTime >= this.logoRevealTime) {
       let textProgress = Math.min(1, (this.elapsedTime - this.logoRevealTime) / this.textTypingTime);
       ctx.font = '20px Comic Sans MS';
