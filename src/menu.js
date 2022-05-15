@@ -82,11 +82,8 @@ window.IntroScene = class {
     }
   }
   render(dt, ctx, canvas) {
-    // fill background
     this.fillBackground(ctx, canvas);
-    // draw big logo text
     this.drawLogoText(ctx, canvas);
-    // draw typing text
     this.drawTypingText(ctx, canvas);
   }
   fillBackground(ctx, canvas) {
@@ -162,21 +159,26 @@ window.MenuScene = class {
     }
   }
   render(dt, ctx, canvas) {
-    //fill menu background
+    this.fillMenuBackground(ctx, canvas);
+    this.drawMenuTitle(ctx, canvas);
+    this.drawMenuItems(ctx, canvas);
+  }
+  fillMenuBackground(ctx, canvas) {
     const backgroundImage = new Image();
     backgroundImage.src = './images/menuBackground.png';
     ctx.fillStyle = '#c0c0c0';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(backgroundImage, 0, 0);
-    // draw menu title
+  }
+  drawMenuTitle(ctx, canvas) {
     ctx.font = '60px Comic Sans MS';
     ctx.textBaseline = 'top';
     ctx.fillStyle = '#00ffff';
     ctx.fillText(this.menuTitle,
       (canvas.width - ctx.measureText(this.menuTitle).width) / 2,
       10);
-
-    // draw menu items
+  }
+  drawMenuItems(ctx, canvas) {
     const itemHeight = 50;
     const fontSize = 30;
     ctx.font = fontSize + 'px Comic Sans MS';
