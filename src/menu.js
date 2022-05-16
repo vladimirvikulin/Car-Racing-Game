@@ -69,7 +69,6 @@ window.Game = class {
   }
 };
 
-// Intro scene
 window.IntroScene = class {
   constructor(game) {
     this.logoRevealTime = 2;
@@ -97,9 +96,10 @@ window.IntroScene = class {
     backgroundImage.src = './images/introBackground.png';
     ctx.fillStyle = '#c0c0c0';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
+    const BOTTOM_SHIFT = 150;
     ctx.drawImage(backgroundImage,
       canvas.width / 2 - backgroundImage.width / 2,
-      canvas.height / 2 - backgroundImage.height / 2 - 150);
+      canvas.height / 2 - backgroundImage.height / 2 - BOTTOM_SHIFT);
   }
   drawLogoText(ctx, canvas) {
     ctx.globalAlpha = Math.min(1, this.elapsedTime / this.logoRevealTime);
@@ -114,18 +114,17 @@ window.IntroScene = class {
       let textProgress = Math.min(1, (this.elapsedTime - this.logoRevealTime) / this.textTypingTime);
       ctx.font = '20px Comic Sans MS';
       ctx.fillStyle = '#000';
+      const LOGO_SHIFT = 80;
       ctx.fillText(this.infoText.substr(0,
         Math.floor(this.infoText.length * textProgress)),
       (canvas.width - ctx.measureText(this.infoText).width) / 2,
-      canvas.height / 2 + 80);
+      canvas.height / 2 + LOGO_SHIFT);
     }
   }
 };
 
-// Menu scene
 window.MenuScene = class {
   constructor(game) {
-    // set default values
     this.game = game;
     this.opacityDirection = 1;
     this.menuActiveOpacity = 0;
@@ -191,9 +190,10 @@ window.MenuScene = class {
     ctx.font = '60px Comic Sans MS';
     ctx.textBaseline = 'top';
     ctx.fillStyle = '#00ffff';
+    const TOP_SHIFT = 10;
     ctx.fillText(this.menuTitle,
       (canvas.width - ctx.measureText(this.menuTitle).width) / 2,
-      10);
+      TOP_SHIFT);
   }
   drawMenuItems(ctx, canvas) {
     const itemHeight = 50;
@@ -216,7 +216,6 @@ window.MenuScene = class {
   }
 };
 
-// Main game scene
 window.GameScene = function gameStart() {
   window.open('game.html', '_self');
 };
@@ -225,19 +224,18 @@ window.Garage = function openGarage() {
   window.open('garage.html', '_self');
 };
 
-// Exit scene
 window.ExitScene = class {
   update(dt) {}
   render(dt, ctx, canvas) {
-    // clear the canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     const gameOverText = 'Thanks for playing my game';
     ctx.textBaseline = 'top';
     ctx.font = '100px Comic Sans MS';
     ctx.fillStyle = '#089cd3';
+    const BOTTOM_SHIFT = 50;
     ctx.fillText(gameOverText,
       (canvas.width - ctx.measureText(gameOverText).width) / 2,
-      canvas.height / 2 - 50);
+      canvas.height / 2 - BOTTOM_SHIFT);
   }
 };
 
