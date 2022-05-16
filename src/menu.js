@@ -1,10 +1,12 @@
 'use strict';
 
-const KeyW = 87;
-const KeyS = 83;
-const ArrowUp = 38;
-const ArrowDown = 40;
-const Enter = 13;
+const keyCodes = {
+  KeyW: 87,
+  KeyS: 83,
+  ArrowUp: 38,
+  ArrowDown: 40,
+  Enter: 13,
+};
 
 window.Game = class {
   constructor() {
@@ -81,7 +83,7 @@ window.IntroScene = class {
   update(dt) {
     this.elapsedTime += dt;
     if (this.elapsedTime >= this.sceneDisplayTime ||
-      this.game.checkKeyPress(Enter)) {
+      this.game.checkKeyPress(keyCodes.Enter)) {
       this.game.setScene(MenuScene);
     }
   }
@@ -146,11 +148,11 @@ window.MenuScene = class {
     this.menuActiveOpacity += dt * this.opacityDirection;
   }
   menuNavigation() {
-    if (this.game.checkKeyPress(KeyS) || this.game.checkKeyPress(ArrowDown)) {
+    if (this.game.checkKeyPress(keyCodes.KeyS) || this.game.checkKeyPress(keyCodes.ArrowDown)) {
       this.menuIndex++;
       this.menuIndex %= this.menuItems.length;
       this.menuSound();
-    } else if (this.game.checkKeyPress(KeyW) || this.game.checkKeyPress(ArrowUp)) {
+    } else if (this.game.checkKeyPress(keyCodes.KeyW) || this.game.checkKeyPress(keyCodes.ArrowUp)) {
       this.menuIndex--;
       if (this.menuIndex < 0) this.menuIndex = this.menuItems.length - 1;
       this.menuSound();
@@ -162,7 +164,7 @@ window.MenuScene = class {
     menuSelectEffect.play();
   }
   menuItemSelected() {
-    if (this.game.checkKeyPress(Enter)) {
+    if (this.game.checkKeyPress(keyCodes.Enter)) {
       switch (this.menuIndex) {
       case 0: this.game.setScene(GameScene);
         break;
@@ -237,7 +239,7 @@ window.ExitScene = class {
       (canvas.width - ctx.measureText(gameOverText).width) / 2,
       canvas.height / 2 - 50);
   }
-}
+};
 
 // launch game
 const game = new Game();
