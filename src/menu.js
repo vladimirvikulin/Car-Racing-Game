@@ -26,16 +26,11 @@ window.Game = class {
   checkKeyPress(keyCode) {
     const isKeyPressed = this.keys[keyCode];
     this.lastKeyState = this.lastKeyState || {};
-    if (typeof this.lastKeyState[keyCode] === 'undefined') {
-      this.lastKeyState[keyCode] = isKeyPressed;
-      return false;
-    }
     if (this.lastKeyState[keyCode] !== isKeyPressed) {
       this.lastKeyState[keyCode] = isKeyPressed;
       return isKeyPressed;
-    } else {
-      return false;
     }
+    return false;
   }
   setScene(Scene) {
     this.activeScene = new Scene(this);
@@ -48,7 +43,6 @@ window.Game = class {
     this.activeScene.render(dt, this.ctx, this.canvas);
     this.ctx.restore();
   }
-
   start() {
     let last = performance.now();
     const step = 1 / 60;
