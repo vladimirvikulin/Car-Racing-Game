@@ -12,13 +12,13 @@ function resize() {
 }
 
 resize();
-
 const game = {
   gameSpeed: 5,
   fps: 1000 / 60,
   timer: null,
   scale: 0.12,
   players: 0,
+  round: 0,
 };
 
 const objects = [];
@@ -61,15 +61,20 @@ const roads = [
 ];
 
 function start() {
-  game.timer = setInterval(update, game.fps);
+  setStartSettings();
+  showRound();
+  setTimeout(() => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    game.timer = setInterval(update, game.fps);
+  }, 2000);
 }
 
 function reload() {
+  clearInterval(game.timer);
+  game.timer = null;
   setTimeout(() => {
-    clearInterval(game.timer);
-    game.timer = null;
     location.reload();
-  }, 7000);
+  }, 5000);
 }
 
 function update() {
@@ -85,9 +90,12 @@ function update() {
   moveEnemy();
   moveCar();
   gameDifficulty();
-  if (player1.dead && player2.dead) {
+  if (player1.dead && player2.dead && game.round === 3) {
     endScore();
     reload();
+  }
+  if (player1.dead && player2.dead && game.round < 3) {
+    nextRound();
   }
 }
 
@@ -125,12 +133,12 @@ function spawnEnemies() {
       objects.push(ENEMY_CARS[1]);
       break;
     case 3:
-      if (player1.score >= 1000 || player2.score >= 1000) {
+      if (player1.roundScore >= 1000 || player2.roundScore >= 1000) {
         objects.push(ENEMY_CARS[2]);
       }
       break;
     case 4:
-      if (player1.score >= 1500 || player2.score >= 1500) {
+      if (player1.roundScore >= 1500 || player2.roundScore >= 1500) {
         objects.push(ENEMY_CARS[3]);
       }
       break;
@@ -166,10 +174,13 @@ function draw() {
   for (let i = 0; i < objects.length; i++) {
     drawCar(objects[i]);
   }
+  const BOTTOM_SHIFT = 20;
   ctx.fillStyle = 'white';
   ctx.font = '30px Comic Sans MS';
-  ctx.fillText('Счет игрока №1: ' + player1.score, canvas.width / 40, canvas.height - 20);
-  ctx.fillText('Счет игрока №2: ' + player2.score,  canvas.width / 1.25 , canvas.height - 20);
+  ctx.fillText('Счет игрока №1: ' + player1.roundScore,
+    canvas.width / 40, canvas.height - BOTTOM_SHIFT);
+  ctx.fillText('Счет игрока №2: ' + player2.roundScore,
+    canvas.width / 1.25, canvas.height - BOTTOM_SHIFT);
 }
 
 function drawCar(car) {
@@ -217,61 +228,78 @@ function moveCar() {
   }
 }
 
-// function moveCar() {
-//   window.addEventListener('keydown', (e) => {
-//     codes[e.code] = true;
-//   });
-//   window.addEventListener('keyup', (e) => {
-//     codes[e.code] = false;
-//   });
-// }
-
-
-// function getKeyAction(keyDown) {
-//   const keyAction = {
-//     'KeyA': () => player1.move('x', 'left'),
-//     'KeyD': () => player1.move('x', 'right'),
-//     'KeyW': () => player1.move('x', 'up'),
-//     'KeyS': () => player1.move('x', 'down'),
-//     'ArrowLeft': () => player2.move('x', 'left'),
-//     'ArrowRight': () => player2.move('x', 'right'),
-//     'ArrowUp': () => player2.move('y', 'up'),
-//     'ArrowDown': () => player2.move('y', 'down'),
-//     'Escape': game.timer === null ? start() : reload()
-//   };
-//   return keyAction[keyDown]();
-// }
-
 function randomNum(min, max) {
   const rand = min - 0.5 + Math.random() * (max - min + 1);
   return Math.round(rand);
 }
 
 function endScore() {
-  const congrag1 = 'Поздравляю игрок №1 набрал больше очков. Его счет:';
-  const congrag2 = 'Поздравляю игрок №2 набрал больше очков. Его счет:';
-  if (player1.score > player2.score) {
+  const congrag1 = 'Поздравляю, игрок №1 набрал больше очков. Его счет:';
+  const congrag2 = 'Поздравляю, игрок №2 набрал больше очков. Его счет:';
+  player1.totalScore += player1.roundScore;
+  player2.totalScore += player2.roundScore;
+  if (player1.totalScore > player2.totalScore) {
     ctx.font = '40px Comic Sans MS';
     ctx.fillStyle = '#00ffff';
-    ctx.fillText(congrag1 + player1.score,
+    ctx.fillText(congrag1 + player1.totalScore,
       (canvas.width - ctx.measureText(congrag1).width) / 2,
       canvas.height / 2);
   }
-  if (player2.score > player1.score) {
+  if (player2.totalScore > player1.totalScore) {
     ctx.font = '40px Comic Sans MS';
     ctx.fillStyle = '#00ffff';
-    ctx.fillText(congrag2 + player2.score,
+    ctx.fillText(congrag2 + player2.totalScore,
       (canvas.width - ctx.measureText(congrag2).width) / 2,
       canvas.height / 2);
   }
 }
 
 function gameDifficulty() {
-  if (player1.score === 1000 || player2.score === 1000 ||
-    player1.score === 2000 || player2.score === 2000 ||
-    player1.score === 3000 || player2.score === 3000 ||
-    player1.score === 4000 || player2.score === 4000 ||
-    player1.score === 5000 || player2.score === 5000) {
+  if (player1.roundScore === 1000 || player2.roundScore === 1000 ||
+    player1.roundScore === 2000 || player2.roundScore === 2000 ||
+    player1.roundScore === 3000 || player2.roundScore === 3000 ||
+    player1.roundScore === 4000 || player2.roundScore === 4000 ||
+    player1.roundScore === 5000 || player2.roundScore === 5000) {
     game.gameSpeed += 5;
   }
+}
+
+function showRound() {
+  const MIDDLE_SHIFT = 100;
+  game.round++;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.font = '40px Comic Sans MS';
+  ctx.fillStyle = '#00ffff';
+  ctx.fillText('Round №' + game.round,
+    (canvas.width - ctx.measureText('Round №').width) / 2,
+    canvas.height / 2);
+  ctx.font = '30px Comic Sans MS';
+  ctx.fillText('Общий счет игрока №1: ' + player1.totalScore,
+    canvas.width / 10, canvas.height / 2 + MIDDLE_SHIFT);
+  ctx.fillText('Общий счет игрока №2: ' + player2.totalScore,
+    canvas.width / 1.5, canvas.height / 2 + MIDDLE_SHIFT);
+}
+
+function nextRound() {
+  clearInterval(game.timer);
+  game.timer = null;
+  start();
+}
+
+function setStartSettings() {
+  player1.dead = false;
+  player1.isPlayer = true;
+  player2.dead = false;
+  player2.isPlayer = true;
+  game.gameSpeed = 5;
+  objects.length = 0;
+  const CAR_SHIFT = 100;
+  player1.x = canvas.width / 2 - CAR_SHIFT;
+  player1.y = canvas.height / 2;
+  player2.x = canvas.width / 2 + CAR_SHIFT;
+  player2.y = canvas.height / 2;
+  player1.totalScore += player1.roundScore;
+  player2.totalScore += player2.roundScore;
+  player1.roundScore = 0;
+  player2.roundScore = 0;
 }
