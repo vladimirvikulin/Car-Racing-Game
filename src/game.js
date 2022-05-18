@@ -13,8 +13,16 @@ function resize() {
 
 resize();
 
-let gameSpeed = 5;
+const game = {
+  gameSpeed: 5,
+  fps: 1000 / 60,
+  timer: null,
+  scale: 0.12,
+  players: 0,
+};
+
 const objects = [];
+
 const codes = {
   'ArrowLeft': false,
   'ArrowRight': false,
@@ -26,17 +34,14 @@ const codes = {
   'KeyS': false,
   'Escape': false,
 };
-const UPDATE_TIME = 1000 / 60;
-let timer = null;
-const scale = 0.12;
-let players = 0;
-const CAR_SHIFT = 100;
+
 const PLAYER_DATA = [
   ['yellow', 10],
   ['red', 9],
   ['black', 8],
   ['purple', 6],
 ];
+
 const ENEMY_DATA = [
   ['enemyCar1', 9],
   ['enemyCar2', 10],
@@ -56,13 +61,13 @@ const roads = [
 ];
 
 function start() {
-  timer = setInterval(update, UPDATE_TIME);
+  game.timer = setInterval(update, game.fps);
 }
 
 function reload() {
   setTimeout(() => {
-    clearInterval(timer);
-    timer = null;
+    clearInterval(game.timer);
+    game.timer = null;
     location.reload();
   }, 7000);
 }
@@ -93,7 +98,7 @@ function collision(player) {
     if (hit) {
       player.dead = true;
       player.isPlayer = false;
-      if (gameSpeed !== 5) gameSpeed -= 5;
+      if (game.gameSpeed !== 5) game.gameSpeed -= 5;
       soundEfects();
       break;
     }
@@ -131,7 +136,6 @@ function spawnEnemies() {
       break;
     }
   }
-  console.log(objects);
 }
 
 function moveEnemy() {
@@ -177,8 +181,8 @@ function drawCar(car) {
     car.image.height,
     car.x,
     car.y,
-    car.image.width * scale,
-    car.image.height * scale
+    car.image.width * game.scale,
+    car.image.height * game.scale
   );
 }
 
@@ -208,10 +212,35 @@ function moveCar() {
     if (codes['ArrowDown']) player2.move('y', 'down');
   }
   if (codes['Escape']) {
-    if (timer === null) start();
+    if (game.timer === null) start();
     else reload();
   }
 }
+
+// function moveCar() {
+//   window.addEventListener('keydown', (e) => {
+//     codes[e.code] = true;
+//   });
+//   window.addEventListener('keyup', (e) => {
+//     codes[e.code] = false;
+//   });
+// }
+
+
+// function getKeyAction(keyDown) {
+//   const keyAction = {
+//     'KeyA': () => player1.move('x', 'left'),
+//     'KeyD': () => player1.move('x', 'right'),
+//     'KeyW': () => player1.move('x', 'up'),
+//     'KeyS': () => player1.move('x', 'down'),
+//     'ArrowLeft': () => player2.move('x', 'left'),
+//     'ArrowRight': () => player2.move('x', 'right'),
+//     'ArrowUp': () => player2.move('y', 'up'),
+//     'ArrowDown': () => player2.move('y', 'down'),
+//     'Escape': game.timer === null ? start() : reload()
+//   };
+//   return keyAction[keyDown]();
+// }
 
 function randomNum(min, max) {
   const rand = min - 0.5 + Math.random() * (max - min + 1);
@@ -243,6 +272,6 @@ function gameDifficulty() {
     player1.score === 3000 || player2.score === 3000 ||
     player1.score === 4000 || player2.score === 4000 ||
     player1.score === 5000 || player2.score === 5000) {
-    gameSpeed += 5;
+    game.gameSpeed += 5;
   }
 }

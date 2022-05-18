@@ -247,4 +247,4 @@ window.ExitScene = class {
 };
 
 // launch game
-const game = new Game();
+const myGame = new Game();

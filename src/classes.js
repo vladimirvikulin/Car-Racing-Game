@@ -11,9 +11,9 @@ class Road {
   }
 
   update(road) {
-    this.y += gameSpeed;
+    this.y += game.gameSpeed;
     if (this.y > window.innerHeight) {
-      this.y = road.y - canvas.width + gameSpeed;
+      this.y = road.y - canvas.width + game.gameSpeed;
     }
   }
 }
@@ -36,7 +36,7 @@ class Car {
     const BORDER_SHIFT = 50;
     if (this.isPlayer) this.score++;
     if (!this.isPlayer) {
-      this.y += gameSpeed;
+      this.y += game.gameSpeed;
     }
     if (this.y > canvas.height + BORDER_SHIFT) {
       this.dead = true;
@@ -44,10 +44,10 @@ class Car {
   }
 
   collision(car) {
-    const collisionTop = this.y < car.y + car.image.height * scale;
-    const collisionBottom = this.y + this.image.height * scale > car.y;
-    const collisionLeft = this.x + this.image.width * scale > car.x;
-    const collisionRight = this.x < car.x + car.image.width * scale;
+    const collisionTop = this.y < car.y + car.image.height * game.scale;
+    const collisionBottom = this.y + this.image.height * game.scale > car.y;
+    const collisionLeft = this.x + this.image.width * game.scale > car.x;
+    const collisionRight = this.x < car.x + car.image.width * game.scale;
     return (collisionTop && collisionBottom && collisionLeft && collisionRight);
   }
 
@@ -55,7 +55,7 @@ class Car {
     if (coord === 'x') {
       if (direction === 'right') this.x += this.speed;
       else if (direction === 'left') this.x -= this.speed;
-      if (this.x + this.image.width * scale > canvas.width) {
+      if (this.x + this.image.width * game.scale > canvas.width) {
         this.x -= this.speed;
       }
       if (this.x < 0) {
@@ -65,7 +65,7 @@ class Car {
       if (direction === 'down') this.y += this.speed;
       else if (direction === 'up') this.y -= this.speed;
       if (!this.isEnemy) {
-        if (this.y + this.image.height * scale > canvas.height) {
+        if (this.y + this.image.height * game.scale > canvas.height) {
           this.y -= this.speed;
         }
         if (this.y < 0) {
@@ -95,10 +95,11 @@ class Car {
   }
 
   static createPlayer() {
-    players++;
+    game.players++;
+    const CAR_SHIFT = 100;
     return PLAYER_DATA.map(([color, speed]) => {
       let x = 0;
-      if (players === 1) {
+      if (game.players === 1) {
         x = canvas.width / 2 - CAR_SHIFT;
       } else {
         x = canvas.width / 2 + CAR_SHIFT;
