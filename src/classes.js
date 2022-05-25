@@ -76,7 +76,6 @@ class Car {
     }
   }
 
-
   pickCar1() {
     player1 = this;
     this.checkPlayer(player2);

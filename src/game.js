@@ -12,6 +12,7 @@ function resize() {
 }
 
 resize();
+
 const game = {
   gameSpeed: 5,
   fps: 1000 / 60,
@@ -61,6 +62,7 @@ const roads = [
 ];
 
 function start() {
+  if (game.round === 0) backgroundMusic();
   setStartSettings();
   showRound();
   setTimeout(() => {
@@ -99,6 +101,12 @@ function update() {
   }
 }
 
+function backgroundMusic() {
+  const gameMusic = new Audio();
+  gameMusic.src = './audio/gameMusic.mp3';
+  gameMusic.play();
+}
+
 function collision(player) {
   let hit = false;
   for (let i = 0; i < objects.length; i++) {
@@ -107,7 +115,7 @@ function collision(player) {
       player.dead = true;
       player.isPlayer = false;
       if (game.gameSpeed !== 5) game.gameSpeed -= 5;
-      soundEfects();
+      collisionSound();
       break;
     }
   }
@@ -197,7 +205,7 @@ function drawCar(car) {
   );
 }
 
-function soundEfects() {
+function collisionSound() {
   const collision = new Audio();
   collision.src = './audio/collision.wav';
   collision.play();
