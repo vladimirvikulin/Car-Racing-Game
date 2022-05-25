@@ -255,11 +255,7 @@ function endScore() {
 }
 
 function gameDifficulty() {
-  if (player1.roundScore === 1000 || player2.roundScore === 1000 ||
-    player1.roundScore === 2000 || player2.roundScore === 2000 ||
-    player1.roundScore === 3000 || player2.roundScore === 3000 ||
-    player1.roundScore === 4000 || player2.roundScore === 4000 ||
-    player1.roundScore === 5000 || player2.roundScore === 5000) {
+  if (player1.roundScore % 1000 === 0 || player2.roundScore % 1000 === 0) {
     game.gameSpeed += 5;
   }
 }
