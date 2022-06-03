@@ -108,9 +108,8 @@ function backgroundMusic() {
 }
 
 function collision(player) {
-  let hit = false;
-  for (let i = 0; i < objects.length; i++) {
-    hit = player.collision(objects[i]);
+  for (const object of objects) {
+    const hit = player.collision(object);
     if (hit) {
       player.dead = true;
       player.isPlayer = false;
