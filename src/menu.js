@@ -69,7 +69,7 @@ window.IntroScene = class {
     this.textTypingTime = 2;
     this.sceneDisplayTime = 6;
     this.elapsedTime = 0;
-    this.bigText = 'Car-Racing';
+    this.LogoText = 'Car-Racing';
     this.infoText = 'This is game for two players, just dodge enemies and beat your opponent';
     this.game = game;
   }
@@ -91,21 +91,18 @@ window.IntroScene = class {
     ctx.fillStyle = '#c0c0c0';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     const BOTTOM_SHIFT = 150;
-    ctx.drawImage(
-      backgroundImage,
-      canvas.width / 2 - backgroundImage.width / 2,
-      canvas.height / 2 - backgroundImage.height / 2 - BOTTOM_SHIFT
-    );
+    const width = canvas.width / 2 - backgroundImage.width / 2;
+    const height = canvas.height / 2 - backgroundImage.height / 2 - BOTTOM_SHIFT;
+    ctx.drawImage(backgroundImage, width, height);
   }
   drawLogoText(ctx, canvas) {
     ctx.globalAlpha = Math.min(1, this.elapsedTime / this.logoRevealTime);
     ctx.font = '80px Comic Sans MS';
     ctx.fillStyle = '#000';
-    ctx.fillText(
-      this.bigText,
-      (canvas.width - ctx.measureText(this.bigText).width) / 2,
-      canvas.height / 2
-    );
+    const xPos = (canvas.width - ctx.measureText(this.LogoText).width) / 2;
+    const yPos = canvas.height / 2;
+    const LogoText = this.LogoText;
+    ctx.fillText(LogoText, xPos, yPos);
   }
   drawTypingText(ctx, canvas) {
     if (this.elapsedTime >= this.logoRevealTime) {
@@ -113,12 +110,10 @@ window.IntroScene = class {
       ctx.font = '20px Comic Sans MS';
       ctx.fillStyle = '#000';
       const LOGO_SHIFT = 80;
-      ctx.fillText(
-        this.infoText.substring(
-          0, Math.floor(this.infoText.length * textProgress)),
-        (canvas.width - ctx.measureText(this.infoText).width) / 2,
-        canvas.height / 2 + LOGO_SHIFT
-      );
+      const infoText = this.infoText.substring(0, Math.floor(this.infoText.length * textProgress));
+      const xPos = (canvas.width - ctx.measureText(this.infoText).width) / 2;
+      const yPos =  canvas.height / 2 + LOGO_SHIFT;
+      ctx.fillText(infoText, xPos, yPos);
     }
   }
 };
@@ -191,34 +186,29 @@ window.MenuScene = class {
     ctx.textBaseline = 'top';
     ctx.fillStyle = '#00ffff';
     const TOP_SHIFT = 10;
-    ctx.fillText(
-      this.menuTitle,
-      (canvas.width - ctx.measureText(this.menuTitle).width) / 2,
-      TOP_SHIFT
-    );
+    const menuTitle = this.menuTitle;
+    const xPos = (canvas.width - ctx.measureText(this.menuTitle).width) / 2;
+    const yPos = TOP_SHIFT;
+    ctx.fillText(menuTitle, xPos, yPos);
   }
   drawMenuItems(ctx, canvas) {
     const itemHeight = 50;
     const fontSize = 30;
+    const width = canvas.width;
     ctx.font = fontSize + 'px Comic Sans MS';
-    for (const [index, item] of this.menuItems.entries()) {
+    for (const [index, text] of this.menuItems.entries()) {
       if (index === this.menuIndex) {
+        const xPos = 0;
+        const yPos = canvas.height / 2 + index * itemHeight;
         ctx.globalAlpha = this.menuActiveOpacity;
         ctx.fillStyle = '#089cd3';
-        ctx.fillRect(
-          0,
-          canvas.height / 2 + index * itemHeight,
-          canvas.width,
-          itemHeight
-        );
+        ctx.fillRect(xPos, yPos, width, itemHeight);
       }
       ctx.globalAlpha = 1;
       ctx.fillStyle = '#fff';
-      ctx.fillText(
-        item,
-        (canvas.width - ctx.measureText(item).width) / 2,
-        canvas.height / 2 + index * itemHeight + (itemHeight - fontSize) / 2
-      );
+      const xTextPos = (canvas.width - ctx.measureText(text).width) / 2;
+      const yTextPos = canvas.height / 2 + index * itemHeight + (itemHeight - fontSize) / 2;
+      ctx.fillText(text, xTextPos, yTextPos);
     }
   }
 };
@@ -240,9 +230,9 @@ window.ExitScene = class {
     ctx.font = '100px Comic Sans MS';
     ctx.fillStyle = '#089cd3';
     const BOTTOM_SHIFT = 50;
-    ctx.fillText(gameOverText,
-      (canvas.width - ctx.measureText(gameOverText).width) / 2,
-      canvas.height / 2 - BOTTOM_SHIFT);
+    const xPos = (canvas.width - ctx.measureText(gameOverText).width) / 2;
+    const yPos = canvas.height / 2 - BOTTOM_SHIFT;
+    ctx.fillText(gameOverText, xPos, yPos);
   }
 };
 
