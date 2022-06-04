@@ -1,11 +1,11 @@
 'use strict';
 
 const keyCodes = {
-  KeyW: 87,
-  KeyS: 83,
-  ArrowUp: 38,
-  ArrowDown: 40,
-  Enter: 13,
+  'ArrowUp': false,
+  'ArrowDown': false,
+  'KeyW': false,
+  'KeyS': false,
+  'Enter': false,
 };
 
 window.Game = class {
@@ -19,12 +19,11 @@ window.Game = class {
     this.start();
   }
   initInput() {
-    this.keys = {};
-    document.addEventListener('keydown', (e) => { this.keys[e.which] = true; });
-    document.addEventListener('keyup', (e) => { this.keys[e.which] = false; });
+    document.addEventListener('keydown', (e) => { keyCodes[e.code] = true; });
+    document.addEventListener('keyup', (e) => { keyCodes[e.code] = false; });
   }
   checkKeyPress(keyCode) {
-    const isKeyPressed = this.keys[keyCode];
+    const isKeyPressed = keyCodes[keyCode];
     this.lastKeyState = this.lastKeyState || {};
     if (this.lastKeyState[keyCode] !== isKeyPressed) {
       this.lastKeyState[keyCode] = isKeyPressed;
@@ -76,7 +75,7 @@ window.IntroScene = class {
   update(dt) {
     this.elapsedTime += dt;
     if (this.elapsedTime >= this.sceneDisplayTime ||
-      this.game.checkKeyPress(keyCodes.Enter)) {
+      this.game.checkKeyPress('Enter')) {
       this.game.setScene(MenuScene);
     }
   }
@@ -142,11 +141,11 @@ window.MenuScene = class {
     this.menuActiveOpacity += dt * this.opacityDirection;
   }
   menuNavigation() {
-    if (this.game.checkKeyPress(keyCodes.KeyS) || this.game.checkKeyPress(keyCodes.ArrowDown)) {
+    if (this.game.checkKeyPress('KeyS') || this.game.checkKeyPress('ArrowDown')) {
       this.menuIndex++;
       this.menuIndex %= this.menuItems.length;
       this.menuSound();
-    } else if (this.game.checkKeyPress(keyCodes.KeyW) || this.game.checkKeyPress(keyCodes.ArrowUp)) {
+    } else if (this.game.checkKeyPress('KeyW') || this.game.checkKeyPress('ArrowUp')) {
       this.menuIndex--;
       if (this.menuIndex < 0) this.menuIndex = this.menuItems.length - 1;
       this.menuSound();
@@ -158,7 +157,7 @@ window.MenuScene = class {
     menuSelectEffect.play();
   }
   menuItemSelected() {
-    if (this.game.checkKeyPress(keyCodes.Enter)) {
+    if (this.game.checkKeyPress('Enter')) {
       switch (this.menuIndex) {
       case 0: this.game.setScene(GameScene);
         break;
