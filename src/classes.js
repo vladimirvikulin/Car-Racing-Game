@@ -56,22 +56,18 @@ class Car {
     if (coord === 'x') {
       if (direction === 'right') this.x += this.speed;
       else if (direction === 'left') this.x -= this.speed;
-      if (this.x + this.image.width * game.scale > canvas.width) {
-        this.x -= this.speed;
-      }
-      if (this.x < 0) {
-        this.x = 0;
-      }
+      const carX = this.x + this.image.width * game.scale;
+      if (carX > canvas.width) this.x -= this.speed;
+      if (this.x < 0) this.x = 0;
     } else {
       if (direction === 'down') this.y += this.speed;
       else if (direction === 'up') this.y -= this.speed;
+      const carY = this.y + this.image.height * game.scale;
       if (!this.isEnemy) {
-        if (this.y + this.image.height * game.scale > canvas.height) {
+        if (carY > canvas.height) {
           this.y -= this.speed;
         }
-        if (this.y < 0) {
-          this.y = 0;
-        }
+        if (this.y < 0) this.y = 0;
       }
     }
   }
@@ -97,12 +93,13 @@ class Car {
   static createPlayer() {
     game.players++;
     const CAR_SHIFT = 100;
+    const halfCanvasWidth = canvas.width / 2;
     return PLAYER_DATA.map(([color, speed]) => {
       let x = 0;
       if (game.players === 1) {
-        x = canvas.width / 2 - CAR_SHIFT;
+        x = halfCanvasWidth - CAR_SHIFT;
       } else {
-        x = canvas.width / 2 + CAR_SHIFT;
+        x = halfCanvasWidth + CAR_SHIFT;
       }
       const y = canvas.height / 2;
       const img = `./images/${color}Car.png`;

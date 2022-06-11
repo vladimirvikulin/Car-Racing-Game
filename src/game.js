@@ -131,17 +131,17 @@ function checkEnemyDead() {
 
 function spawnEnemies() {
   if (randomNum(0, 10) > 9) {
-      const ENEMY_CARS = Car.createEnemy();
-      const carIndex = randomNum(0, 3);
-      if (carIndex < 2) {
-          objects.push(ENEMY_CARS[carIndex]);
-      } else {
-          if ((player1.roundScore >= 1000 || player2.roundScore >= 1000) && carIndex === 2) {
-              objects.push(ENEMY_CARS[carIndex]);
-          } else if ((player1.roundScore >= 1500 || player2.roundScore >= 1500) && carIndex === 3) {
-              objects.push(ENEMY_CARS[carIndex]);
-          }
+    const ENEMY_CARS = Car.createEnemy();
+    const carIndex = randomNum(0, 3);
+    if (carIndex < 2) {
+      objects.push(ENEMY_CARS[carIndex]);
+    } else {
+      if ((player1.roundScore >= 1000 || player2.roundScore >= 1000) && carIndex === 2) {
+        objects.push(ENEMY_CARS[carIndex]);
+      } else if ((player1.roundScore >= 1500 || player2.roundScore >= 1500) && carIndex === 3) {
+        objects.push(ENEMY_CARS[carIndex]);
       }
+    }
   }
 }
 
