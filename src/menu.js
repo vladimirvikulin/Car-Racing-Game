@@ -1,5 +1,6 @@
 'use strict';
 
+const font = 'Comic Sans MS';
 const keyCodes = {
   'ArrowUp': false,
   'ArrowDown': false,
@@ -96,7 +97,7 @@ window.IntroScene = class {
   }
   drawLogoText(ctx, canvas) {
     ctx.globalAlpha = Math.min(1, this.elapsedTime / this.logoRevealTime);
-    ctx.font = '80px Comic Sans MS';
+    ctx.font = `80px ${font}`;
     ctx.fillStyle = '#000';
     const xPos = (canvas.width - ctx.measureText(this.LogoText).width) / 2;
     const yPos = canvas.height / 2;
@@ -106,7 +107,7 @@ window.IntroScene = class {
   drawTypingText(ctx, canvas) {
     if (this.elapsedTime >= this.logoRevealTime) {
       let textProgress = Math.min(1, (this.elapsedTime - this.logoRevealTime) / this.textTypingTime);
-      ctx.font = '20px Comic Sans MS';
+      ctx.font = `20px ${font}`;
       ctx.fillStyle = '#000';
       const LOGO_SHIFT = 80;
       const infoText = this.infoText.substring(0, Math.floor(this.infoText.length * textProgress));
@@ -181,7 +182,7 @@ window.MenuScene = class {
     ctx.drawImage(backgroundImage, 0, 0);
   }
   drawMenuTitle(ctx, canvas) {
-    ctx.font = '60px Comic Sans MS';
+    ctx.font = `60px ${font}`;
     ctx.textBaseline = 'top';
     ctx.fillStyle = '#00ffff';
     const TOP_SHIFT = 10;
@@ -194,7 +195,7 @@ window.MenuScene = class {
     const itemHeight = 50;
     const fontSize = 30;
     const width = canvas.width;
-    ctx.font = fontSize + 'px Comic Sans MS';
+    ctx.font = fontSize + `px ${font}`;
     for (const [index, text] of this.menuItems.entries()) {
       if (index === this.menuIndex) {
         const xPos = 0;
@@ -226,7 +227,7 @@ window.ExitScene = class {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     const gameOverText = 'Thanks for playing my game';
     ctx.textBaseline = 'top';
-    ctx.font = '100px Comic Sans MS';
+    ctx.font = `100px ${font}`;
     ctx.fillStyle = '#089cd3';
     const BOTTOM_SHIFT = 50;
     const xPos = (canvas.width - ctx.measureText(gameOverText).width) / 2;

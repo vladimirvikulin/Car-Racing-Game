@@ -20,6 +20,7 @@ const game = {
   scale: 0.12,
   players: 0,
   round: 0,
+  font: 'Comic Sans MS',
 };
 
 const objects = [];
@@ -170,12 +171,12 @@ function draw() {
   drawCar(player1);
   drawCar(player2);
 
-  for (let i = 0; i < objects.length; i++) {
-    drawCar(objects[i]);
+  for (const object of objects) {
+    drawCar(object);
   }
   const BOTTOM_SHIFT = 20;
-  ctx.fillStyle = 'white';
-  ctx.font = '30px Comic Sans MS';
+  ctx.fillStyle = '#ffffff';
+  ctx.font = `30px ${game.font}`;
   ctx.fillText('Счет игрока №1: ' + player1.roundScore,
     canvas.width / 40, canvas.height - BOTTOM_SHIFT);
   ctx.fillText('Счет игрока №2: ' + player2.roundScore,
@@ -238,14 +239,14 @@ function endScore() {
   player1.totalScore += player1.roundScore;
   player2.totalScore += player2.roundScore;
   if (player1.totalScore > player2.totalScore) {
-    ctx.font = '40px Comic Sans MS';
+    ctx.font = `40px ${game.font}`;
     ctx.fillStyle = '#00ffff';
     ctx.fillText(congrag1 + player1.totalScore,
       (canvas.width - ctx.measureText(congrag1).width) / 2,
       canvas.height / 2);
   }
   if (player2.totalScore > player1.totalScore) {
-    ctx.font = '40px Comic Sans MS';
+    ctx.font = `40px ${game.font}`;
     ctx.fillStyle = '#00ffff';
     ctx.fillText(congrag2 + player2.totalScore,
       (canvas.width - ctx.measureText(congrag2).width) / 2,
@@ -263,12 +264,12 @@ function showRound() {
   const MIDDLE_SHIFT = 100;
   game.round++;
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.font = '40px Comic Sans MS';
+  ctx.font = `40px ${game.font}`;
   ctx.fillStyle = '#00ffff';
   ctx.fillText('Round №' + game.round,
     (canvas.width - ctx.measureText('Round №').width) / 2,
     canvas.height / 2);
-  ctx.font = '30px Comic Sans MS';
+  ctx.font = `30px ${game.font}`;
   ctx.fillText('Общий счет игрока №1: ' + player1.totalScore,
     canvas.width / 10, canvas.height / 2 + MIDDLE_SHIFT);
   ctx.fillText('Общий счет игрока №2: ' + player2.totalScore,
@@ -298,3 +299,5 @@ function setStartSettings() {
   player1.roundScore = 0;
   player2.roundScore = 0;
 }
+
+
