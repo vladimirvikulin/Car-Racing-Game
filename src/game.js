@@ -21,6 +21,8 @@ const game = {
   players: 0,
   round: 0,
   font: 'Comic Sans MS',
+  directionPlayer1: undefined,
+  directionPlayer2: undefined,
 };
 
 const objects = [];
@@ -35,6 +37,17 @@ const codes = {
   'KeyW': false,
   'KeyS': false,
   'Escape': false,
+};
+
+const codesDirections = {
+  'ArrowLeft': 'left',
+  'ArrowRight': 'right',
+  'ArrowUp': 'up',
+  'ArrowDown': 'down',
+  'KeyA': 'left',
+  'KeyD': 'right',
+  'KeyW': 'up',
+  'KeyS': 'down',
 };
 
 const PLAYER_DATA = [
@@ -61,6 +74,21 @@ const roads = [
   new Road('./images/road.png', 0),
   new Road('./images/road.png', canvas.width)
 ];
+
+window.addEventListener('keydown', (e) => {
+  const key = e.code;
+  codes[key] = true;
+  if (key === 'KeyA' || key === 'KeyD' || key === 'KeyW' || key === 'KeyS') {
+    game.directionPlayer1 = codesDirections[key];
+  }
+  if (key === 'ArrowLeft' || key === 'ArrowRight' || key === 'ArrowUp' || key === 'ArrowDown') {
+    game.directionPlayer2 = codesDirections[key];
+  }
+});
+window.addEventListener('keyup', (e) => {
+  codes[e.code] = false;
+});
+
 
 function start() {
   if (game.round === 0) backgroundMusic();
@@ -91,7 +119,7 @@ function update() {
   draw();
   spawnEnemies();
   moveEnemy();
-  moveCar();
+  moveCar(game.directionPlayer1, game.directionPlayer2);
   gameDifficulty();
   if (player1.dead && player2.dead && game.round === 3) {
     endScore();
@@ -203,24 +231,14 @@ function collisionSound() {
   collision.play();
 }
 
-function moveCar() {
-  window.addEventListener('keydown', (e) => {
-    codes[e.code] = true;
-  });
-  window.addEventListener('keyup', (e) => {
-    codes[e.code] = false;
-  });
+function moveCar(directionPlayer1, directionPlayer2) {
   if (player1.isPlayer) {
-    if (codes['KeyA']) player1.move('x', 'left');
-    if (codes['KeyD']) player1.move('x', 'right');
-    if (codes['KeyW']) player1.move('y', 'up');
-    if (codes['KeyS']) player1.move('y', 'down');
+    if (codes['KeyA'] || codes['KeyD']) player1.move('x', directionPlayer1);
+    if (codes['KeyW'] || codes['KeyS']) player1.move('y', directionPlayer1);
   }
   if (player2.isPlayer) {
-    if (codes['ArrowLeft']) player2.move('x', 'left');
-    if (codes['ArrowRight']) player2.move('x', 'right');
-    if (codes['ArrowUp']) player2.move('y', 'up');
-    if (codes['ArrowDown']) player2.move('y', 'down');
+    if (codes['ArrowLeft'] || codes['ArrowRight']) player2.move('x', directionPlayer2);
+    if (codes['ArrowUp'] || codes['ArrowDown']) player2.move('y', directionPlayer2);
   }
   if (codes['Escape']) {
     if (game.timer === null) start();
