@@ -54,22 +54,26 @@ class Car {
 
   move(coord, direction) {
     if (coord === 'x') {
-      if (direction === 'right') this.x += this.speed;
-      else if (direction === 'left') this.x -= this.speed;
-      const carX = this.x + this.image.width * game.scale;
-      if (carX > canvas.width) this.x -= this.speed;
-      if (this.x < 0) this.x = 0;
+      this.moveX(direction);
     } else {
-      if (direction === 'down') this.y += this.speed;
-      else if (direction === 'up') this.y -= this.speed;
-      const carY = this.y + this.image.height * game.scale;
-      if (!this.isEnemy) {
-        if (carY > canvas.height) {
-          this.y -= this.speed;
-        }
-        if (this.y < 0) this.y = 0;
-      }
+      this.moveY(direction)
     }
+  }
+
+  moveX(direction) {
+    if (direction === 'right') this.x += this.speed;
+    else if (direction === 'left') this.x -= this.speed;
+    const carX = this.x + this.image.width * game.scale;
+    if (carX > canvas.width) this.x -= this.speed;
+    if (this.x < 0) this.x = 0;
+  }
+
+  moveY(direction) {
+    if (direction === 'down') this.y += this.speed;
+    else if (direction === 'up') this.y -= this.speed;
+    const carY = this.y + this.image.height * game.scale;
+    if (!this.isEnemy && carY > canvas.height) this.y -= this.speed;
+    if (!this.isEnemy && this.y < 0) this.y = 0;
   }
 
   pickCar1() {

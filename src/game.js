@@ -162,14 +162,8 @@ function spawnEnemies() {
   if (randomNum(0, 10) > 9) {
     const ENEMY_CARS = Car.createEnemy();
     const carIndex = randomNum(0, 3);
-    if (carIndex < 2) {
+    if ((carIndex < 2) || ((player1.roundScore >= 1000 || player2.roundScore >= 1000) && carIndex === 2) || ((player1.roundScore >= 1500 || player2.roundScore >= 1500) && carIndex === 3)) {
       objects.push(ENEMY_CARS[carIndex]);
-    } else {
-      if ((player1.roundScore >= 1000 || player2.roundScore >= 1000) && carIndex === 2) {
-        objects.push(ENEMY_CARS[carIndex]);
-      } else if ((player1.roundScore >= 1500 || player2.roundScore >= 1500) && carIndex === 3) {
-        objects.push(ENEMY_CARS[carIndex]);
-      }
     }
   }
 }
@@ -182,15 +176,15 @@ function moveEnemy() {
 
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  for (let i = 0; i < roads.length; i++) {
+  for (let road of roads) {
     ctx.drawImage(
-      roads[i].image,
+      road.image,
       0,
       0,
-      roads[i].image.width,
-      roads[i].image.height,
-      roads[i].x,
-      roads[i].y,
+      road.image.width,
+      road.image.height,
+      road.x,
+      road.y,
       canvas.width,
       canvas.width
     );
@@ -233,17 +227,25 @@ function collisionSound() {
 
 function moveCar(directionPlayer1, directionPlayer2) {
   if (player1.isPlayer) {
-    if (codes['KeyA'] || codes['KeyD']) player1.move('x', directionPlayer1);
-    if (codes['KeyW'] || codes['KeyS']) player1.move('y', directionPlayer1);
+    moveCarPlayer1(directionPlayer1)
   }
   if (player2.isPlayer) {
-    if (codes['ArrowLeft'] || codes['ArrowRight']) player2.move('x', directionPlayer2);
-    if (codes['ArrowUp'] || codes['ArrowDown']) player2.move('y', directionPlayer2);
+    moveCarPlayer2(directionPlayer2)
   }
   if (codes['Escape']) {
     if (game.timer === null) start();
     else reload();
   }
+}
+
+function moveCarPlayer1(directionPlayer1) {
+  if (codes['KeyA'] || codes['KeyD']) player1.move('x', directionPlayer1);
+  if (codes['KeyW'] || codes['KeyS']) player1.move('y', directionPlayer1);
+}
+
+function moveCarPlayer2(directionPlayer2) {
+  if (codes['ArrowLeft'] || codes['ArrowRight']) player2.move('x', directionPlayer2);
+  if (codes['ArrowUp'] || codes['ArrowDown']) player2.move('y', directionPlayer2);
 }
 
 function randomNum(min, max) {
