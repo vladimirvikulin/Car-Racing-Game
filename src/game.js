@@ -10,8 +10,21 @@ function resize() {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
 }
-
 resize();
+
+let currentVolume = 0.5;
+let gameMusic;
+document.getElementById('volume').addEventListener('input', function () {
+    currentVolume = this.value;
+    localStorage.setItem('volume', currentVolume);
+});
+window.addEventListener('load', function () {
+    const savedVolume = localStorage.getItem('volume');
+    if (savedVolume !== null) {
+        document.getElementById('volume').value = savedVolume
+        currentVolume = savedVolume
+    }
+});
 
 const game = {
   gameSpeed: 5,
@@ -109,6 +122,9 @@ function reload() {
 }
 
 function update() {
+    if (gameMusic) {
+    gameMusic.volume = currentVolume;
+  }
   roads[0].update(roads[1]);
   roads[1].update(roads[0]);
   player1.update();
@@ -131,8 +147,10 @@ function update() {
 }
 
 function backgroundMusic() {
-  const gameMusic = new Audio();
+  gameMusic = new Audio();
   gameMusic.src = './audio/gameMusic.mp3';
+  gameMusic.volume = currentVolume;
+  gameMusic.loop = true;
   gameMusic.play();
 }
 
@@ -222,6 +240,7 @@ function drawCar(car) {
 function collisionSound() {
   const collision = new Audio();
   collision.src = './audio/collision.wav';
+  collision.volume = currentVolume;
   collision.play();
 }
 

@@ -9,6 +9,20 @@ const keyCodes = {
   'Enter': false,
 };
 
+let currentVolume = 0.5;
+document.getElementById('volume').addEventListener('input', function () {
+    currentVolume = this.value;
+    localStorage.setItem('volume', currentVolume);
+});
+window.addEventListener('load', function () {
+    const savedVolume = localStorage.getItem('volume');
+    if (savedVolume !== null) {
+        document.getElementById('volume').value = savedVolume
+        currentVolume = savedVolume
+    }
+});
+
+
 window.Game = class {
   constructor() {
     this.canvas = document.querySelector('canvas');
@@ -155,6 +169,7 @@ window.MenuScene = class {
   menuSound() {
     const menuSelectEffect = new Audio();
     menuSelectEffect.src = './audio/menuSelectEffect.mp3';
+    menuSelectEffect.volume = currentVolume;
     menuSelectEffect.play();
   }
   menuItemSelected() {

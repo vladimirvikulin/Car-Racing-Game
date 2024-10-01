@@ -91,3 +91,41 @@ p {
     color: #fff;
     transition: .5s ease;
   }
+
+.controls {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 100;
+}
+
+.back-button {
+    z-index: 100;
+}
+
+#backToMenu {
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #089cd3;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
+#backToMenu:hover {
+    background-color: #0077a3;
+}
+
+.volume-control {
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    color: #fff;
+}
+
+#volume {
+    width: 150px;
+}

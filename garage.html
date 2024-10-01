@@ -1,31 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<title>CarRacing</title>
-		<link rel="stylesheet" href="./styles/style.css">
-		<meta charset="utf-8">
-		<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' />
-	</head>
-	<body>
-        <div class="header"> Garage </div>		
-		<div class="garage">
-            <div class="item">
-                <img src="./images/yellowPick.png" alt="yellowPick"/>
-                <p>Speed: 180 km/h</p>
-            </div>
-            <div class="item">
-                <img src="./images/redPick.png" alt="redPick"/>
-                <p>Speed: 168 km/h</p>
-            </div>
-            <div class="item">
-                <img src="./images/blackPick.png" alt="blackPick"/>
-                <p>Speed: 144 km/h</p>
-            </div>
-            <div class="item">
-                <img src="./images/purplePick.png" alt="purplePick"/>
-                <p>Speed: 132 km/h</p>
-            </div>
-		  </div>
+
+<head>
+    <title>CarRacing</title>
+    <link rel="stylesheet" href="./styles/style.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+</head>
+
+<body>
+    <div class="header"> Garage </div>
+    <div class="garage">
+        <div class="item">
+            <img src="./images/yellowPick.png" alt="yellowPick" />
+            <p>Speed: 180 km/h</p>
         </div>
-	</body>
+        <div class="item">
+            <img src="./images/redPick.png" alt="redPick" />
+            <p>Speed: 168 km/h</p>
+        </div>
+        <div class="item">
+            <img src="./images/blackPick.png" alt="blackPick" />
+            <p>Speed: 144 km/h</p>
+        </div>
+        <div class="item">
+            <img src="./images/purplePick.png" alt="purplePick" />
+            <p>Speed: 132 km/h</p>
+        </div>
+    </div>
+        <div class="controls">
+            <div class="back-button">
+                <button id="backToMenu">Back</button>
+            </div>
+        </div>
+    <script>
+        document.getElementById('backToMenu').addEventListener('click', function () {
+            window.open('index.html', '_self');
+        });
+    </script>
+</body>
+
 </html>
