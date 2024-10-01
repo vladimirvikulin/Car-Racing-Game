@@ -214,13 +214,12 @@ function draw() {
   for (const object of objects) {
     drawCar(object);
   }
-  const BOTTOM_SHIFT = 20;
   ctx.fillStyle = '#ffffff';
   ctx.font = `30px ${game.font}`;
   ctx.fillText('Счет игрока №1: ' + player1.roundScore,
-    canvas.width / 40, canvas.height - BOTTOM_SHIFT);
+    canvas.width / 40, canvas.height / 30);
   ctx.fillText('Счет игрока №2: ' + player2.roundScore,
-    canvas.width / 1.25, canvas.height - BOTTOM_SHIFT);
+    canvas.width / 1.3, canvas.height / 30);
 }
 
 function drawCar(car) {
