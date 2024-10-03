@@ -82,7 +82,7 @@ class Car {
     cars[carIndex].classList.add('selected-car');
 
     player1 = this;
-    this.checkPlayer(player2);
+    this.checkStartButton(player2);
 }
 
  pickCar2(carIndex) {
@@ -91,14 +91,13 @@ class Car {
     cars[carIndex].classList.add('selected-car');
 
     player2 = this;
-    this.checkPlayer(player1);
+    this.checkStartButton(player1);
 }
 
-  checkPlayer(player) {
+  checkStartButton(player) {
+    const startButton = document.getElementById('startGame');
     if (player.hasOwnProperty('isPlayer')) {
-      document.getElementById('p1').remove();
-      document.getElementById('p2').remove();
-      start();
+      startButton.disabled = false;
     }
   }
 

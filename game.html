@@ -15,6 +15,7 @@
 			<img src="./images/purplePick.png" alt="purplePick" class="item" onclick="PLAYER1_CARS[3].pickCar1(3)" />
 		  </div>
         </div>
+
         <div class="pickMenu player2" id="p2">
 			<div>Player2</div>
 			<img src="./images/yellowPick.png" alt="yellowPick" class="item" onclick="PLAYER2_CARS[0].pickCar2(0)" />
@@ -22,6 +23,9 @@
 			<img src="./images/blackPick.png" alt="blackPick" class="item" onclick="PLAYER2_CARS[2].pickCar2(2)" />
 			<img src="./images/purplePick.png" alt="purplePick" class="item" onclick="PLAYER2_CARS[3].pickCar2(3)" />
 		  </div>
+		<div class="start-button">
+			<button id="startGame" disabled>START!</button>
+		</div>
 		<div class="controls">
 			<div class="back-button">
 				<button id="backToMenu">Back</button>
@@ -40,6 +44,14 @@
 			document.getElementById('backToMenu').addEventListener('click', function () {
 				window.open('index.html', '_self');
 			});
+			document.getElementById('startGame').addEventListener('click', function () {
+					if (player1 && player2) {
+						document.getElementById('p1').remove();
+						document.getElementById('p2').remove();
+						this.remove();
+						start();
+					}
+				});
 		</script>
 	</body>
 </html>

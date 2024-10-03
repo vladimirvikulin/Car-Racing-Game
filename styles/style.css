@@ -133,3 +133,31 @@ p {
 .selected-car {
     transform: scale(1.5); 
 }
+
+.start-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#startGame {
+    padding: 10px 20px;
+    font-size: 22px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    transition: background-color 0.3s ease;
+}
+
+#startGame:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
+
+#startGame:hover:not(:disabled) {
+    background-color: #218838;
+}
