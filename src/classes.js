@@ -76,15 +76,23 @@ class Car {
     if (!this.isEnemy && this.y < 0) this.y = 0;
   }
 
-  pickCar1() {
+  pickCar1(carIndex) {
+    const cars = document.querySelectorAll('#p1 .item');
+    cars.forEach(car => car.classList.remove('selected-car'));
+    cars[carIndex].classList.add('selected-car');
+
     player1 = this;
     this.checkPlayer(player2);
-  }
+}
 
-  pickCar2() {
+ pickCar2(carIndex) {
+    const cars = document.querySelectorAll('#p2 .item');
+    cars.forEach(car => car.classList.remove('selected-car'));
+    cars[carIndex].classList.add('selected-car');
+
     player2 = this;
     this.checkPlayer(player1);
-  }
+}
 
   checkPlayer(player) {
     if (player.hasOwnProperty('isPlayer')) {
