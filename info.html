@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="./styles/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Info</title>
+</head>
+<body>
+    <div class="header"> Game Info </div>
+    <div class="info-container">  
+            <strong>Controls:</strong><br>
+            Player № 1: W, A, S, D<br>
+            Player № 2: ArrowUp, ArrowLeft, ArrowDown, ArrowRight<br>
+            <strong>Description:</strong><br>
+            This is a survival race for two players. The one who scores the most points in 3 rounds wins!<br> 
+            To earn points, you need to dodge enemies that will constantly be coming at you.<br> 
+            To start the game, select the 'Start' tab and press the Enter key.<br> 
+            Next, each player can choose the car they want to play with.<br> 
+            There are a total of 4 types of cars in the game, each with its own speed.<br> 
+            You can view the specifications in the menu under the 'Garage' tab.<br> 
+            The more points players score, the harder the game will become.<br> 
+            The speed of the game will continuously increase, and new enemies will appear.<br> 
+            I wish you a successful and fun game!<br>
+         <em>Made by Volodymyr Vikulin</em>
+    </div>
+    <div class="controls">
+        <div class="back-button">
+           <button id="backToMenu">Back</button>
+        </div>
+    </div>
+    <script>
+        document.getElementById('backToMenu').addEventListener('click', function () {
+            window.open('index.html', '_self');
+        });
+    </script>
+</body>
+
+</html>

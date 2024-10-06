@@ -142,6 +142,7 @@ window.MenuScene = class {
     this.menuItems = [
       'Start',
       'Garage',
+      'Info',
       'Exit'
     ];
   }
@@ -179,7 +180,9 @@ window.MenuScene = class {
         break;
       case 1: this.game.setScene(Garage);
         break;
-      case 2: this.game.setScene(ExitScene);
+      case 2: this.game.setScene(InfoScene);
+        break;
+      case 3: this.game.setScene(ExitScene);
         break;
       }
     }
@@ -234,6 +237,10 @@ window.GameScene = function gameStart() {
 
 window.Garage = function openGarage() {
   window.open('garage.html', '_self');
+};
+
+window.InfoScene = function openInfo() {
+  window.open('info.html', '_self');
 };
 
 window.ExitScene = class {
