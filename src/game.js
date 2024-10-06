@@ -216,9 +216,9 @@ function draw() {
   }
   ctx.fillStyle = '#ffffff';
   ctx.font = `30px ${game.font}`;
-  ctx.fillText('Счет игрока №1: ' + player1.roundScore,
+  ctx.fillText('Score of Player #1: ' + player1.roundScore,
     canvas.width / 40, canvas.height / 30);
-  ctx.fillText('Счет игрока №2: ' + player2.roundScore,
+  ctx.fillText('Score of Player #2: ' + player2.roundScore,
     canvas.width / 1.3, canvas.height / 30);
 }
 
@@ -272,8 +272,8 @@ function randomNum(min, max) {
 }
 
 function endScore() {
-  const congrag1 = 'Поздравляю, игрок №1 набрал больше очков. Его счет:';
-  const congrag2 = 'Поздравляю, игрок №2 набрал больше очков. Его счет:';
+  const congrag1 = 'Congratulations, Player #1 scored more points. Their score:';
+  const congrag2 = 'Congratulations, Player #2 scored more points. Their score:';
   player1.totalScore += player1.roundScore;
   player2.totalScore += player2.roundScore;
   if (player1.totalScore > player2.totalScore) {
@@ -308,9 +308,9 @@ function showRound() {
     (canvas.width - ctx.measureText('Round №').width) / 2,
     canvas.height / 2);
   ctx.font = `30px ${game.font}`;
-  ctx.fillText('Общий счет игрока №1: ' + player1.totalScore,
+  ctx.fillText('Total score of Player #1: ' + player1.totalScore,
     canvas.width / 10, canvas.height / 2 + MIDDLE_SHIFT);
-  ctx.fillText('Общий счет игрока №2: ' + player2.totalScore,
+  ctx.fillText('Total score of Player #2: ' + player2.totalScore,
     canvas.width / 1.5, canvas.height / 2 + MIDDLE_SHIFT);
 }
 
