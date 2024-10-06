@@ -1,15 +1,36 @@
 # Сar-Racing
 
-Управління:
+## Overview
 
-Гравець № 1: W, A, S, D
+Car Racing Game is a two-player racing game where players must dodge enemies to score points. The objective is to accumulate the highest score over three rounds. Players can choose different cars, each with unique speeds, from the garage.
 
-Гравець № 2: ArrowUp, ArrowLeft, ArrowDown, ArrowRight
+## Features
 
-Це гонки на виживання для двох гравців. Виграє той, хто за 3 раунди набере більшу кількість очок! Щоб отримувати очки, потрібно ухилятися від ворогів, які будуть постійно їхати на вас.
+- **Two-player mode:** Compete against a friend.
+- **Multiple car options:** Choose from four different cars with varying speeds.
+- **Dynamic gameplay:** The speed of the game increases as players score points, introducing new challenges.
+- **Informative menus:** Easy navigation through menus for starting the game, accessing the garage, and viewing game instructions.
 
-Щоб розпочати гру, виберіть вкладку 'Start' та натисніть клавішу Enter. Далі кожен з гравців може вибрати собі авто, на якому захоче зіграти. Всього у грі 4 види авто, і кожен з них має свою швидкість. Характеристики можна подивитися в меню на вкладці 'Garage'.
+## Controls
 
-Чим більше гравці набиратимуть очок, тим складніше буде грати. Адже швидкість гри буде постійно зростати та будуть з'являтися нові вороги.Тому бажаю вам вдалої та веселої гри.
+- **Player 1:** 
+  - Move: `W, A, S, D`
+  
+- **Player 2:**
+  - Move: `Arrow Keys`
+  
+- **Start Game:** Choose option `Start` on the main menu.
 
-Лінк на гру закріплений в описі репозіторія.
+## Installation
+
+To run the game locally, follow these steps:
+
+1. Clone the repository to your local machine
+```bash
+   git clone https://github.com/vladimirvikulin/Car-Racing-Game.git
+```
+2. Navigate to the project directory in your terminal or command prompt
+3. To run the project
+```bash
+$ .\index.html
+```
