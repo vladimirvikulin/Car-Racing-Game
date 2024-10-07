@@ -5,6 +5,13 @@ const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
 window.addEventListener('resize', resize);
+window.addEventListener('load', function () {
+  const player1HighScore = localStorage.getItem('player1HighScore') || 0;
+  const player2HighScore = localStorage.getItem('player2HighScore') || 0;
+
+  document.getElementById('player1HighScore').textContent = 'Best score: ' + player1HighScore;
+  document.getElementById('player2HighScore').textContent = 'Best score: ' + player2HighScore;
+});
 
 function resize() {
   canvas.width = window.innerWidth;
@@ -272,11 +279,23 @@ function randomNum(min, max) {
 }
 
 function endScore() {
-  const congrag1 = 'Congratulations, Player #1 scored more points. Their score:';
-  const congrag2 = 'Congratulations, Player #2 scored more points. Their score:';
+  const congrag1 = 'Congratulations, Player #1 scored more points. Score:';
+  const congrag2 = 'Congratulations, Player #2 scored more points. Score:';
   player1.totalScore += player1.roundScore;
   player2.totalScore += player2.roundScore;
+
+  const player1HighScore = localStorage.getItem('player1HighScore') || 0;
+  if (player1.totalScore > player1HighScore) {
+    localStorage.setItem('player1HighScore', player1.totalScore);
+  }
+
+  const player2HighScore = localStorage.getItem('player2HighScore') || 0;
+  if (player2.totalScore > player2HighScore) {
+    localStorage.setItem('player2HighScore', player2.totalScore);
+  }
+
   if (player1.totalScore > player2.totalScore) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.font = `40px ${game.font}`;
     ctx.fillStyle = '#00ffff';
     ctx.fillText(congrag1 + player1.totalScore,
@@ -284,6 +303,7 @@ function endScore() {
       canvas.height / 2);
   }
   if (player2.totalScore > player1.totalScore) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.font = `40px ${game.font}`;
     ctx.fillStyle = '#00ffff';
     ctx.fillText(congrag2 + player2.totalScore,

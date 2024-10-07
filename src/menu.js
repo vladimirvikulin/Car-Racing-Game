@@ -258,5 +258,4 @@ window.ExitScene = class {
   }
 };
 
-// launch game
 const myGame = new Game();
